@@ -1,4 +1,5 @@
 package me.kanmodel.sep18.algorithm
+
 import kotlin.math.cos
 
 /**
@@ -11,14 +12,16 @@ import kotlin.math.cos
 fun main(args: Array<String>) {
 //    val arg = Array(5){IntArray(5)}
     val dim = 6
-    val cost = arrayOf(
+/*    val cost = arrayOf(
             intArrayOf(0, 10, Int.MAX_VALUE, 30, 45, Int.MAX_VALUE),
             intArrayOf(10, 0, 50, Int.MAX_VALUE, 40, 25),
             intArrayOf(Int.MAX_VALUE, 50, 0, Int.MAX_VALUE, 35, 15),
             intArrayOf(30, Int.MAX_VALUE, Int.MAX_VALUE, 0, Int.MAX_VALUE, 20),
             intArrayOf(45, 40, 35, Int.MAX_VALUE, 0, 55),
             intArrayOf(Int.MAX_VALUE, 25, 15, 20, 55, 0)
-    )
+    )*/
+    val cost = loadData()
+
     val coor = arrayOf(
             intArrayOf(1, 1),
             intArrayOf(3, 1),
@@ -28,23 +31,28 @@ fun main(args: Array<String>) {
             intArrayOf(2, 5)
     )
 
+    val picToTree = Array(dim) { IntArray(dim) { Int.MAX_VALUE } }
 
     print2D(cost)
 
     var minCost = 0
-//    var near = Int.MAX_VALUE
     var k = 0
     var l = 1
     for (i in 0 until dim) {
         for (j in i + 1 until dim) {
             if (cost[i][j] < cost[k][l]) {
-//                near = cost[i][j]
                 k = i;
                 l = j
             }
         }
     }
-    println("cost[$k][$l] ${cost[k][l]} 为最短边")
+    println("cost[${k + 1}][${l + 1}] ${cost[k][l]} 为最短边")
+
+    picToTree[k][l] = cost[k][l]
+    picToTree[l][k] = cost[k][l]
+    TreeFrame(picToTree.copyOf(), coor).isVisible = true
+    Thread.sleep(100)
+
     minCost += cost[k][l]
     val tree: ArrayList<Edge> = ArrayList()
     tree.add(Edge(k, l))
@@ -74,8 +82,14 @@ fun main(args: Array<String>) {
                 }
             }
         }
-        println("最短路径权值：$costTmp")
+        println("最短路径权值${min + 1} - ${near[min]}：$costTmp")
         minCost += costTmp
+
+        picToTree[min][near[min] - 1] = cost[min][near[min] - 1]
+        picToTree[near[min] - 1][min] = cost[min][near[min] - 1]
+        TreeFrame(picToTree.copyOf(), coor).isVisible = true
+        Thread.sleep(100)
+
         near[min] = 0
 
         for (j in 0 until dim) {

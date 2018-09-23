@@ -1,9 +1,6 @@
 package me.kanmodel.sep18.algorithm
 
-import java.awt.BorderLayout
-import java.awt.Color
-import java.awt.Component
-import java.awt.Font
+import java.awt.*
 import java.util.regex.Pattern
 import javax.swing.JFrame
 import javax.swing.JPanel
@@ -62,7 +59,6 @@ class PictureTable(private val dim: Int = 6) : AbstractTableModel() {
         for (i in 1..dim) {
             columnNames[i] = i.toString()
         }
-
     }
 
 
@@ -188,31 +184,6 @@ var syncFlag = false
 fun showPictureTable(dim: Int = 6) {
     val jf = JFrame("无向图图-邻接矩阵")
     jf.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
-    /*jf.addWindowListener(object : WindowListener {
-        override fun windowDeiconified(e: WindowEvent?) {
-        }
-
-        override fun windowClosing(e: WindowEvent?) {
-            val data = Array(dim) { IntArray(dim) { 0 } }
-            for (i in 0 until dim) {
-                for (j in 0 until dim) {
-                    data[i][j] = rowData[i][j + 1]
-                }
-            }
-            print2D(data)
-            saveData(data)
-        }
-
-        override fun windowClosed(e: WindowEvent?) {}
-
-        override fun windowActivated(e: WindowEvent?) {}
-
-        override fun windowDeactivated(e: WindowEvent?) {}
-
-        override fun windowOpened(e: WindowEvent?) {}
-
-        override fun windowIconified(e: WindowEvent?) {}
-    })*/
     jf.addWindowListener(TableWindowListener(dim))
     val panel = JPanel(BorderLayout())
     val table = JTable(PictureTable(dim))
@@ -231,13 +202,14 @@ fun showPictureTable(dim: Int = 6) {
     jf.contentPane = panel
     jf.pack()
     jf.setLocationRelativeTo(null)
+    jf.iconImage = Toolkit.getDefaultToolkit().getImage("icon_tree.png")
     jf.isVisible = true
 }
 
 fun main(args: Array<String>) {
 //    saveData()
 
-    val dim = 6
+    val dim = 6//todo 文本文件记录维数
 
     showPictureTable(dim)
     println("Hello")

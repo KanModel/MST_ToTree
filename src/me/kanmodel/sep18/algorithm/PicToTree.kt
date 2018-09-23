@@ -1,13 +1,14 @@
 package me.kanmodel.sep18.algorithm
 
 import javax.swing.JFrame
+
+
 import javax.swing.JPanel
 import java.awt.*
 import javax.swing.WindowConstants
 import java.awt.RenderingHints
 import java.awt.Graphics2D
-
-
+import java.net.URL
 /**
  * Created with IntelliJ IDEA.
  * Description:
@@ -15,37 +16,14 @@ import java.awt.Graphics2D
  * Date: 2018-09-18
  * Time: 20:46
  */
-val cost = arrayOf(
-        intArrayOf(0, 10, Int.MAX_VALUE, 30, 45, Int.MAX_VALUE),
-        intArrayOf(10, 0, 50, Int.MAX_VALUE, 40, 25),
-        intArrayOf(Int.MAX_VALUE, 50, 0, Int.MAX_VALUE, 35, 15),
-        intArrayOf(30, Int.MAX_VALUE, Int.MAX_VALUE, 0, Int.MAX_VALUE, 20),
-        intArrayOf(45, 40, 35, Int.MAX_VALUE, 0, 55),
-        intArrayOf(Int.MAX_VALUE, 25, 15, 20, 55, 0)
-)
-val coor = arrayOf(
-        intArrayOf(1, 1),
-        intArrayOf(3, 1),
-        intArrayOf(5, 2),
-        intArrayOf(1, 3),
-        intArrayOf(3, 3),
-        intArrayOf(2, 5)
-)
 
-fun main(args: Array<String>) {
-    EventQueue.invokeLater {
-        // 创建窗口对象
-//        val frame = Main.MyFrame()
-        val frame = TreeFrame()
-//        frame.setSize(1080, 720)
-        // 显示窗口
-        frame.isVisible = true
-    }
-}
+const val RIDUS = 50
 
-class TreeFrame : JFrame("PicToTree") {
+var count: Int = 1
+
+class TreeFrame(cost: Array<IntArray>, coor: Array<IntArray>, val dim: Int = 6) : JFrame("PicToTree ${count++}") {
     init {
-        val treePanel: TreePanel = TreePanel(this)
+        val treePanel: TreePanel = TreePanel(this, cost, coor, dim)
         contentPane = treePanel
         defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
         pack()
@@ -53,12 +31,11 @@ class TreeFrame : JFrame("PicToTree") {
         isResizable = false
         setSize(1080, 720)
         setLocation(108, 72)
+        iconImage = Toolkit.getDefaultToolkit().getImage("icon_tree.png")
     }
 }
 
-class TreePanel(val frame: JFrame) : JPanel() {
-    val RIDUS = 50
-
+class TreePanel(val frame: JFrame, val cost: Array<IntArray>, val coor: Array<IntArray>, val dim: Int = 6) : JPanel() {
     init {
 //        background = Color.GRAY
 //        setSize(500, 500)
@@ -70,8 +47,8 @@ class TreePanel(val frame: JFrame) : JPanel() {
     }
 
     private fun drawPicture(g: Graphics) {
-        for (i in 0 until 6) {
-            for (j in i + 1 until 6) {
+        for (i in 0 until dim) {
+            for (j in i + 1 until dim) {
                 if (cost[i][j] != Int.MAX_VALUE) {
                     drawP2P(g, coor[i][0] * 100, coor[i][1] * 100, coor[j][0] * 100, coor[j][1] * 100, cost[i][j], (i + 1).toString(), (j + 1).toString())
                 }
@@ -110,4 +87,33 @@ class TreePanel(val frame: JFrame) : JPanel() {
         }
         g2d.dispose()
     }
+
+}
+fun main(args: Array<String>) {
+    val cost = arrayOf(
+            intArrayOf(0, 10, Int.MAX_VALUE, 30, 45, Int.MAX_VALUE),
+            intArrayOf(10, 0, 50, Int.MAX_VALUE, 40, 25),
+            intArrayOf(Int.MAX_VALUE, 50, 0, Int.MAX_VALUE, 35, 15),
+            intArrayOf(30, Int.MAX_VALUE, Int.MAX_VALUE, 0, Int.MAX_VALUE, 20),
+            intArrayOf(45, 40, 35, Int.MAX_VALUE, 0, 55),
+            intArrayOf(Int.MAX_VALUE, 25, 15, 20, 55, 0)
+    )
+    val coor = arrayOf(
+            intArrayOf(1, 1),
+            intArrayOf(3, 1),
+            intArrayOf(5, 2),
+            intArrayOf(1, 3),
+            intArrayOf(3, 3),
+            intArrayOf(2, 5)
+    )
+    val frame = TreeFrame(cost, coor)
+    frame.isVisible = true
+/*    EventQueue.invokeLater {
+        // 创建窗口对象
+//        val frame = Main.MyFrame()
+        val frame = TreeFrame(cost, coor)
+//        frame.setSize(1080, 720)
+        // 显示窗口
+        frame.isVisible = true
+    }*/
 }
