@@ -1,4 +1,4 @@
-package me.KanModel.sep18.algorithm
+package me.kanmodel.sep18.algorithm
 import kotlin.math.cos
 
 /**
@@ -88,8 +88,16 @@ fun main(args: Array<String>) {
     }
 }
 
+/**
+ * 数据类：边类
+ */
 data class Edge(val first: Int, val second: Int)
 
+/**
+ * @param arg: 二维整型数组
+ * 输出二维数组
+ *
+ */
 fun print2D(arg: Array<IntArray>) {
     for (i in arg) {
         for (j in i) {

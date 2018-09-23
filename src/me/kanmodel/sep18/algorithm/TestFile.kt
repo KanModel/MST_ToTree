@@ -1,6 +1,4 @@
-package me.KanModel.sep18.algorithm
-
-import me.KanModel.sep18.algorithm.print2D
+package me.kanmodel.sep18.algorithm
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,4 +1,4 @@
-package me.KanModel.sep18.algorithm
+package me.kanmodel.sep18.algorithm
 
 import javax.swing.JFrame
 import javax.swing.JPanel
@@ -53,8 +53,6 @@ class TreeFrame : JFrame("PicToTree") {
         isResizable = false
         setSize(1080, 720)
         setLocation(108, 72)
-//        val screenSize = Toolkit.getDefaultToolkit().screenSize
-//        setBounds((screenSize.width-481)/2, (screenSize.height-338)/2, 481, 338)
     }
 }
 
@@ -68,9 +66,6 @@ class TreePanel(val frame: JFrame) : JPanel() {
 
     override fun paintComponent(g: Graphics?) {
         super.paintComponent(g)
-//        drawLine(g!!)
-//        drawArc(g!!)
-//        test(g!!)
         drawPicture(g!!)
     }
 
@@ -85,9 +80,6 @@ class TreePanel(val frame: JFrame) : JPanel() {
     }
 
     private fun test(g: Graphics) {
-//        drawLine(g, 100, 100, 200, 200, 20)
-//        drawCircle(g, 100, 100)
-//        drawCircle(g, 200, 200)
         drawP2P(g, 100, 100, 200, 200, 200)
         drawP2P(g, 200, 100, 300, 300, 160)
     }
