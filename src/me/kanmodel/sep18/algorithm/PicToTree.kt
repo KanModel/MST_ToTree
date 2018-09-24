@@ -1,14 +1,11 @@
 package me.kanmodel.sep18.algorithm
 
-import javax.swing.JFrame
 
-
-import javax.swing.JPanel
 import java.awt.*
-import javax.swing.WindowConstants
 import java.awt.RenderingHints
 import java.awt.Graphics2D
-import java.net.URL
+import javax.swing.*
+
 /**
  * Created with IntelliJ IDEA.
  * Description:
@@ -21,24 +18,49 @@ const val RIDUS = 50
 
 var count: Int = 1
 
-class TreeFrame(cost: Array<IntArray>, coor: Array<IntArray>, val dim: Int = 6) : JFrame("PicToTree ${count++}") {
+class TreeFrame(cost: Array<IntArray>? = null, coor: Array<IntArray>? = null, val dim: Int = 6) : JFrame("PicToTree") {
+    val mainPanel = JPanel(FlowLayout())
+
     init {
-        val treePanel: TreePanel = TreePanel(this, cost, coor, dim)
-        contentPane = treePanel
+        mainPanel.background = Color.gray
+//        val text = JTextArea()
+//        val text2 = JScrollPane(text)
+//        mainPanel.add(text2)
+//        val treePanel: TreePanel = TreePanel(this, cost!!, coor!!, dim)
+//        mainPanel.add(treePanel)
+
+        contentPane = mainPanel
         defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
         pack()
         setLocationRelativeTo(null)
-        isResizable = false
-        setSize(1080, 720)
+        isResizable = true
+        setSize(1000, 800)
         setLocation(108, 72)
         iconImage = Toolkit.getDefaultToolkit().getImage("icon_tree.png")
     }
+
+    fun addTreePanel(cost: Array<IntArray>, coor: Array<IntArray>) {
+        val treePanel: TreePanel = TreePanel(this, cost, coor, dim)
+        mainPanel.add(treePanel)
+        this.pack()
+    }
 }
 
-class TreePanel(val frame: JFrame, val cost: Array<IntArray>, val coor: Array<IntArray>, val dim: Int = 6) : JPanel() {
+fun copyArray(source: Array<IntArray>): Array<IntArray> {
+    val clone = Array(source.size){IntArray(source.size)}
+    for (i in 0 until source.size) {
+        for (j in 0 until source[i].size) {
+            clone[i][j] = source[i][j]
+        }
+    }
+    return clone
+}
+
+class TreePanel(val frame: JFrame, private val cost: Array<IntArray>, private val coor: Array<IntArray>, val dim: Int = 6) : JPanel() {
     init {
-//        background = Color.GRAY
+//        background = Color.
 //        setSize(500, 500)
+        preferredSize = Dimension(600, 600)
     }
 
     override fun paintComponent(g: Graphics?) {
@@ -89,15 +111,17 @@ class TreePanel(val frame: JFrame, val cost: Array<IntArray>, val coor: Array<In
     }
 
 }
+
 fun main(args: Array<String>) {
-    val cost = arrayOf(
+/*    val cost = arrayOf(
             intArrayOf(0, 10, Int.MAX_VALUE, 30, 45, Int.MAX_VALUE),
             intArrayOf(10, 0, 50, Int.MAX_VALUE, 40, 25),
             intArrayOf(Int.MAX_VALUE, 50, 0, Int.MAX_VALUE, 35, 15),
             intArrayOf(30, Int.MAX_VALUE, Int.MAX_VALUE, 0, Int.MAX_VALUE, 20),
             intArrayOf(45, 40, 35, Int.MAX_VALUE, 0, 55),
             intArrayOf(Int.MAX_VALUE, 25, 15, 20, 55, 0)
-    )
+    )*/
+    val cost = loadData()
     val coor = arrayOf(
             intArrayOf(1, 1),
             intArrayOf(3, 1),

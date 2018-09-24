@@ -31,7 +31,7 @@ import javax.swing.table.TableCellRenderer
 var rowData: Array<IntArray> = Array(1) { IntArray(1 + 1) { 0 } }
 
 /**
- *
+ * ±Ì∏Ò¿‡
  */
 class PictureTable(private val dim: Int = 6) : AbstractTableModel() {
     /**

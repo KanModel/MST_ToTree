@@ -1,7 +1,5 @@
 package me.kanmodel.sep18.algorithm
 
-import kotlin.math.cos
-
 /**
  * Created with IntelliJ IDEA.
  * Description:
@@ -11,6 +9,9 @@ import kotlin.math.cos
  */
 fun main(args: Array<String>) {
 //    val arg = Array(5){IntArray(5)}
+    val treeFrame = TreeFrame()
+    treeFrame.isVisible = true
+
     val dim = 6
 /*    val cost = arrayOf(
             intArrayOf(0, 10, Int.MAX_VALUE, 30, 45, Int.MAX_VALUE),
@@ -50,7 +51,9 @@ fun main(args: Array<String>) {
 
     picToTree[k][l] = cost[k][l]
     picToTree[l][k] = cost[k][l]
-    TreeFrame(picToTree.copyOf(), coor).isVisible = true
+//    TreeFrame(picToTree.copyOf(), coor).isVisible = true
+    treeFrame.addTreePanel(copyArray(picToTree), coor)
+    print2D(picToTree)
     Thread.sleep(100)
 
     minCost += cost[k][l]
@@ -87,7 +90,9 @@ fun main(args: Array<String>) {
 
         picToTree[min][near[min] - 1] = cost[min][near[min] - 1]
         picToTree[near[min] - 1][min] = cost[min][near[min] - 1]
-        TreeFrame(picToTree.copyOf(), coor).isVisible = true
+//        TreeFrame(picToTree.copyOf(), coor).isVisible = true
+        treeFrame.addTreePanel(copyArray(picToTree), coor)
+        print2D(picToTree)
         Thread.sleep(100)
 
         near[min] = 0
@@ -100,6 +105,7 @@ fun main(args: Array<String>) {
         near.forEach { print("$it ") }
         println()
     }
+    treeFrame.isVisible = true
 }
 
 /**
