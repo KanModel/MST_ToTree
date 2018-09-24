@@ -52,7 +52,8 @@ fun main(args: Array<String>) {
     picToTree[k][l] = cost[k][l]
     picToTree[l][k] = cost[k][l]
 //    TreeFrame(picToTree.copyOf(), coor).isVisible = true
-    treeFrame.addTreePanel(copyArray(picToTree), coor)
+//    treeFrame.addTreePanel(copyArray(picToTree), coor)
+    treeFrame.addTreePanel(Array(dim) { it -> picToTree[it].copyOf() }, coor)
     print2D(picToTree)
     Thread.sleep(100)
 
@@ -91,7 +92,7 @@ fun main(args: Array<String>) {
         picToTree[min][near[min] - 1] = cost[min][near[min] - 1]
         picToTree[near[min] - 1][min] = cost[min][near[min] - 1]
 //        TreeFrame(picToTree.copyOf(), coor).isVisible = true
-        treeFrame.addTreePanel(copyArray(picToTree), coor)
+        treeFrame.addTreePanel(Array(dim) { it -> picToTree[it].copyOf() }, coor)
         print2D(picToTree)
         Thread.sleep(100)
 

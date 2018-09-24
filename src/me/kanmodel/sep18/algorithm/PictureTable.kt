@@ -31,25 +31,28 @@ import javax.swing.table.TableCellRenderer
 var rowData: Array<IntArray> = Array(1) { IntArray(1 + 1) { 0 } }
 
 /**
+ * 表头（列名）
+ */
+var columnNames = Array(1) { "" }
+
+/**
  * 表格类
  */
-class PictureTable(private val dim: Int = 6) : AbstractTableModel() {
-    /**
-     * 表头（列名）
-     */
-    private val columnNames = Array(dim + 1) { "" }
+class PictureTable(private var dim: Int) : AbstractTableModel() {
 
     /**
      * 从文件加载邻接矩阵数据
      */
     init {
         val data = loadData()//加载原始数组
+//        dim = data.size - 1
         rowData = Array(dim) { IntArray(dim + 1) { 0 } }//添加一列后的数组
         for (i in 0 until dim) {
             for (j in 1..dim) {
                 rowData[i][j] = data[i][j - 1]
             }
         }
+        columnNames = Array(dim + 1) { "" }
         for (i in 0 until dim) {
             rowData[i][0] = i + 1
         }
@@ -181,17 +184,20 @@ internal class RowHeaderRenderer : TableCellRenderer {
 var syncFlag = false
 
 
-fun showPictureTable(dim: Int = 6) {
+fun showPictureTable(dim: Int = loadData().size) {
     val jf = JFrame("无向图图-邻接矩阵")
     jf.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
-    jf.addWindowListener(TableWindowListener(dim))
+    jf.addWindowListener(TableWindowListener(dim))//添加窗口事件监听
     val panel = JPanel(BorderLayout())
+
     val table = JTable(PictureTable(dim))
+
     table.columnModel.getColumn(0).cellRenderer = RowHeaderRenderer()//设置第一列格式
-    table.rowHeight = 20
+    table.rowHeight = 20//设置行高 列宽
     for (i in 0..dim) {
         table.columnModel.getColumn(i).preferredWidth = 40
     }
+
     table.tableHeader.resizingAllowed = true
     val tableModel = table.model
     tableModel.addTableModelListener(TableListener(tableModel))
@@ -209,8 +215,6 @@ fun showPictureTable(dim: Int = 6) {
 fun main(args: Array<String>) {
 //    saveData()
 
-    val dim = 6//todo 文本文件记录维数
-
-    showPictureTable(dim)
+    showPictureTable()
     println("Hello")
 }

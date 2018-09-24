@@ -26,8 +26,8 @@ fun saveData(cost: Array<IntArray> = arrayOf(
     }
 
     var data = ""
-    for (i in 0..5) {
-        for (j in 0..5) {
+    for (i in 0 until cost.size) {
+        for (j in 0 until cost.size) {
             data += "${cost[i][j]}\t"
         }
         data += "\n"
@@ -57,15 +57,16 @@ fun loadSourceData(): String {
 fun loadData(): Array<IntArray> {
     val source = loadSourceData()
     println("load :\n$source")
-    val data = Array(6) { IntArray(6) }
     println("分割第一步")
     val s1 = source.split("\n")
     s1.forEach { s: String -> println(s) }
-    println(data.size)
+//    println("第一步分割后分为 ${s1.size} 个部分")
+    val data = Array(s1.size - 1) { IntArray(s1.size - 1) }
     println("分割第二步")
-    for (i in 0..5) {
+    for (i in 0 until s1.size - 1) {
         val s2 = s1[i].split("\t")
-        for (j in 0..5) {
+//        println("第二步分割后分为 ${s2.size} 个部分")
+        for (j in 0 until s1.size - 1) {
             data[i][j] = s2[j].toInt()
         }
     }

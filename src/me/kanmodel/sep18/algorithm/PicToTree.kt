@@ -19,34 +19,39 @@ const val RIDUS = 50
 var count: Int = 1
 
 class TreeFrame(cost: Array<IntArray>? = null, coor: Array<IntArray>? = null, val dim: Int = 6) : JFrame("PicToTree") {
-    val mainPanel = JPanel(FlowLayout())
+    val flowLayout = FlowLayout()
+    val mainPanel = JPanel(flowLayout)
+    val scrollPane = JScrollPane(mainPanel)
 
     init {
-        mainPanel.background = Color.gray
-//        val text = JTextArea()
-//        val text2 = JScrollPane(text)
-//        mainPanel.add(text2)
-//        val treePanel: TreePanel = TreePanel(this, cost!!, coor!!, dim)
-//        mainPanel.add(treePanel)
+        flowLayout.vgap = 4
+        flowLayout.hgap = 0
 
-        contentPane = mainPanel
+        mainPanel.background = Color.gray
+        mainPanel.preferredSize = Dimension(610, (dim - 1) * 604)
+        mainPanel.border = BorderFactory.createEmptyBorder(0, 0, 0, 0)
+        scrollPane.setBounds(0, 0, 620, 610)
+        scrollPane.verticalScrollBar.unitIncrement = 20//设置滚轮滚动速度
+
+        contentPane = scrollPane
         defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
         pack()
         setLocationRelativeTo(null)
-        isResizable = true
-        setSize(1000, 800)
-        setLocation(108, 72)
+        isResizable = false
+        setSize(640, 640)
+        setLocation(64, 64)
         iconImage = Toolkit.getDefaultToolkit().getImage("icon_tree.png")
     }
 
     fun addTreePanel(cost: Array<IntArray>, coor: Array<IntArray>) {
         val treePanel: TreePanel = TreePanel(this, cost, coor, dim)
+        treePanel.border = BorderFactory.createEmptyBorder(2, 5, 2, 5)
         mainPanel.add(treePanel)
-        this.pack()
+//        this.pack()
     }
 }
 
-fun copyArray(source: Array<IntArray>): Array<IntArray> {
+/*fun copyArray(source: Array<IntArray>): Array<IntArray> {
     val clone = Array(source.size){IntArray(source.size)}
     for (i in 0 until source.size) {
         for (j in 0 until source[i].size) {
@@ -54,7 +59,7 @@ fun copyArray(source: Array<IntArray>): Array<IntArray> {
         }
     }
     return clone
-}
+}*/
 
 class TreePanel(val frame: JFrame, private val cost: Array<IntArray>, private val coor: Array<IntArray>, val dim: Int = 6) : JPanel() {
     init {
