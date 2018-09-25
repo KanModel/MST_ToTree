@@ -109,6 +109,13 @@ class PictureTable(private var dim: Int) : AbstractTableModel() {
                     aValue.toString().toInt()
                 }
         rowData[rowIndex][columnIndex] = real
+        val data = Array(dim) { IntArray(dim) { 0 } }
+        for (i in 0 until dim) {
+            for (j in 0 until dim) {
+                data[i][j] = rowData[i][j + 1]
+            }
+        }
+        saveData(data)
         fireTableCellUpdated(rowIndex, columnIndex)
     }
 
@@ -188,6 +195,15 @@ fun showPictureTable(dim: Int = loadData().size) {
     val jf = JFrame("无向图图-邻接矩阵")
     jf.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
     jf.addWindowListener(TableWindowListener(dim))//添加窗口事件监听
+
+    jf.contentPane = getTabelPane()
+    jf.pack()
+    jf.setLocationRelativeTo(null)
+    jf.iconImage = Toolkit.getDefaultToolkit().getImage("icon_tree.png")
+    jf.isVisible = true
+}
+
+fun getTabelPane(dim: Int = loadData().size): JPanel {
     val panel = JPanel(BorderLayout())
 
     val table = JTable(PictureTable(dim))
@@ -205,11 +221,7 @@ fun showPictureTable(dim: Int = loadData().size) {
     panel.add(table.tableHeader, BorderLayout.NORTH)
     panel.add(table, BorderLayout.CENTER)
 
-    jf.contentPane = panel
-    jf.pack()
-    jf.setLocationRelativeTo(null)
-    jf.iconImage = Toolkit.getDefaultToolkit().getImage("icon_tree.png")
-    jf.isVisible = true
+    return panel
 }
 
 fun main(args: Array<String>) {

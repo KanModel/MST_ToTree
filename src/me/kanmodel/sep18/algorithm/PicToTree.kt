@@ -22,6 +22,7 @@ class TreeFrame(cost: Array<IntArray>? = null, coor: Array<IntArray>? = null, va
     val flowLayout = FlowLayout()
     val mainPanel = JPanel(flowLayout)
     val scrollPane = JScrollPane(mainPanel)
+    var count = 0
 
     init {
         flowLayout.vgap = 4
@@ -45,23 +46,14 @@ class TreeFrame(cost: Array<IntArray>? = null, coor: Array<IntArray>? = null, va
 
     fun addTreePanel(cost: Array<IntArray>, coor: Array<IntArray>) {
         val treePanel: TreePanel = TreePanel(this, cost, coor, dim)
+        treePanel.add(JLabel("步骤${++count}"))
         treePanel.border = BorderFactory.createEmptyBorder(2, 5, 2, 5)
         mainPanel.add(treePanel)
 //        this.pack()
     }
 }
 
-/*fun copyArray(source: Array<IntArray>): Array<IntArray> {
-    val clone = Array(source.size){IntArray(source.size)}
-    for (i in 0 until source.size) {
-        for (j in 0 until source[i].size) {
-            clone[i][j] = source[i][j]
-        }
-    }
-    return clone
-}*/
-
-class TreePanel(val frame: JFrame, private val cost: Array<IntArray>, private val coor: Array<IntArray>, val dim: Int = 6) : JPanel() {
+class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private val coor: Array<IntArray>, val dim: Int = 6) : JPanel() {
     init {
 //        background = Color.
 //        setSize(500, 500)
@@ -117,6 +109,19 @@ class TreePanel(val frame: JFrame, private val cost: Array<IntArray>, private va
 
 }
 
+fun getTreePanel(cost: Array<IntArray> = loadData(), coor: Array<IntArray> = arrayOf(
+        intArrayOf(1, 1),
+        intArrayOf(3, 1),
+        intArrayOf(5, 2),
+        intArrayOf(1, 3),
+        intArrayOf(3, 3),
+        intArrayOf(2, 5)
+)): TreePanel {
+    val treePanel: TreePanel = TreePanel(null, cost, coor, loadData().size)
+    treePanel.border = BorderFactory.createEmptyBorder(2, 5, 2, 5)
+    return treePanel
+}
+
 fun main(args: Array<String>) {
 /*    val cost = arrayOf(
             intArrayOf(0, 10, Int.MAX_VALUE, 30, 45, Int.MAX_VALUE),
@@ -136,6 +141,7 @@ fun main(args: Array<String>) {
             intArrayOf(2, 5)
     )
     val frame = TreeFrame(cost, coor)
+    frame.contentPane = getTreePanel(cost, coor)
     frame.isVisible = true
 /*    EventQueue.invokeLater {
         // 创建窗口对象

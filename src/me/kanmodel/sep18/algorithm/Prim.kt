@@ -9,8 +9,11 @@ package me.kanmodel.sep18.algorithm
  */
 fun main(args: Array<String>) {
 //    val arg = Array(5){IntArray(5)}
+    getTreeFram().isVisible = true
+}
+
+fun getTreeFram(): TreeFrame {
     val treeFrame = TreeFrame()
-    treeFrame.isVisible = true
 
     val dim = 6
 /*    val cost = arrayOf(
@@ -55,7 +58,7 @@ fun main(args: Array<String>) {
 //    treeFrame.addTreePanel(copyArray(picToTree), coor)
     treeFrame.addTreePanel(Array(dim) { it -> picToTree[it].copyOf() }, coor)
     print2D(picToTree)
-    Thread.sleep(100)
+//    Thread.sleep(100)
 
     minCost += cost[k][l]
     val tree: ArrayList<Edge> = ArrayList()
@@ -94,7 +97,7 @@ fun main(args: Array<String>) {
 //        TreeFrame(picToTree.copyOf(), coor).isVisible = true
         treeFrame.addTreePanel(Array(dim) { it -> picToTree[it].copyOf() }, coor)
         print2D(picToTree)
-        Thread.sleep(100)
+//        Thread.sleep(100)
 
         near[min] = 0
 
@@ -106,7 +109,8 @@ fun main(args: Array<String>) {
         near.forEach { print("$it ") }
         println()
     }
-    treeFrame.isVisible = true
+//    treeFrame.isVisible = true
+    return treeFrame
 }
 
 /**
