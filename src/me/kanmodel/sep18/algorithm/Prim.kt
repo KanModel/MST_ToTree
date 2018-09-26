@@ -1,5 +1,8 @@
 package me.kanmodel.sep18.algorithm
 
+import me.kanmodel.sep18.algorithm.gui.TreeFrame
+import me.kanmodel.sep18.algorithm.util.DataHolder
+
 /**
  * Created with IntelliJ IDEA.
  * Description:
@@ -24,7 +27,8 @@ fun getTreeFram(): TreeFrame {
             intArrayOf(45, 40, 35, Int.MAX_VALUE, 0, 55),
             intArrayOf(Int.MAX_VALUE, 25, 15, 20, 55, 0)
     )*/
-    val cost = loadData()
+    DataHolder.reload()
+    val cost = DataHolder.cost
 
     val coor = arrayOf(
             intArrayOf(1, 1),

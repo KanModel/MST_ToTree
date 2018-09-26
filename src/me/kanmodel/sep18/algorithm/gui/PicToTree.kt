@@ -1,6 +1,7 @@
-package me.kanmodel.sep18.algorithm
+package me.kanmodel.sep18.algorithm.gui
 
 
+import me.kanmodel.sep18.algorithm.util.DataHolder
 import java.awt.*
 import java.awt.RenderingHints
 import java.awt.Graphics2D
@@ -109,7 +110,7 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
 
 }
 
-fun getTreePanel(cost: Array<IntArray> = loadData(), coor: Array<IntArray> = arrayOf(
+fun getTreePanel(cost: Array<IntArray> = DataHolder.cost, coor: Array<IntArray> = arrayOf(
         intArrayOf(1, 1),
         intArrayOf(3, 1),
         intArrayOf(5, 2),
@@ -117,7 +118,7 @@ fun getTreePanel(cost: Array<IntArray> = loadData(), coor: Array<IntArray> = arr
         intArrayOf(3, 3),
         intArrayOf(2, 5)
 )): TreePanel {
-    val treePanel: TreePanel = TreePanel(null, cost, coor, loadData().size)
+    val treePanel: TreePanel = TreePanel(null, cost, coor, DataHolder.cost.size)
     treePanel.border = BorderFactory.createEmptyBorder(2, 5, 2, 5)
     return treePanel
 }
@@ -131,7 +132,7 @@ fun main(args: Array<String>) {
             intArrayOf(45, 40, 35, Int.MAX_VALUE, 0, 55),
             intArrayOf(Int.MAX_VALUE, 25, 15, 20, 55, 0)
     )*/
-    val cost = loadData()
+    val cost = DataHolder.cost
     val coor = arrayOf(
             intArrayOf(1, 1),
             intArrayOf(3, 1),

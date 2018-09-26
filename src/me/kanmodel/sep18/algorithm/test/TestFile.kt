@@ -1,4 +1,7 @@
-package me.kanmodel.sep18.algorithm
+package me.kanmodel.sep18.algorithm.test
+
+import me.kanmodel.sep18.algorithm.print2D
+import me.kanmodel.sep18.algorithm.util.DataHolder
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,7 +25,11 @@ fun main(args: Array<String>) {
             data[i][j] = s2[j].toInt()
         }
     }*/
-    val data = loadData()
+//    val data = loadData()
+    val data = DataHolder.cost
+    data[0][2] = Int.MAX_VALUE
+    data[2][0] = Int.MAX_VALUE
     print2D(data)
-    saveData(data)
+//    saveData(data)
+    DataHolder.save()
 }

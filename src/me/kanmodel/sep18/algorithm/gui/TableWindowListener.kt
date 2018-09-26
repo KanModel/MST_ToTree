@@ -1,5 +1,7 @@
-package me.kanmodel.sep18.algorithm
+package me.kanmodel.sep18.algorithm.gui
 
+import me.kanmodel.sep18.algorithm.util.DataHolder
+import me.kanmodel.sep18.algorithm.print2D
 import java.awt.event.WindowEvent
 import java.awt.event.WindowListener
 
@@ -28,7 +30,7 @@ class TableWindowListener(val dim: Int = 1): WindowListener{
             }
         }
         print2D(data)
-        saveData(data)
+        DataHolder.save(DataHolder.cost)
     }
 
     override fun windowClosed(e: WindowEvent?) {}

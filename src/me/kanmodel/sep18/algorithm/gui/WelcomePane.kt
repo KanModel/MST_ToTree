@@ -1,5 +1,6 @@
-package me.kanmodel.sep18.algorithm
+package me.kanmodel.sep18.algorithm.gui
 
+import me.kanmodel.sep18.algorithm.util.DataHolder
 import javax.swing.JLabel
 import javax.swing.JPanel
 
@@ -12,6 +13,6 @@ import javax.swing.JPanel
  */
 class WelcomePane :JPanel() {
     init {
-        add(JLabel("当前邻接矩阵纬度${loadData().size}"))
+        add(JLabel("当前邻接矩阵纬度${DataHolder.cost.size}"))
     }
 }

@@ -1,5 +1,6 @@
-package me.kanmodel.sep18.algorithm
+package me.kanmodel.sep18.algorithm.gui
 
+import me.kanmodel.sep18.algorithm.util.DataHolder
 import java.awt.Dimension
 import java.awt.Toolkit
 import javax.swing.JFrame
@@ -18,7 +19,7 @@ class MainFrame : JFrame() {
         defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
         isResizable = false
         setLocationRelativeTo(null)
-        addWindowListener(TableWindowListener(loadData().size))
+        addWindowListener(TableWindowListener(DataHolder.cost.size))
         iconImage = Toolkit.getDefaultToolkit().getImage("icon_tree.png")
         contentPane = MainTabbedPane()
     }

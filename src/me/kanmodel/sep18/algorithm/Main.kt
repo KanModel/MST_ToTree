@@ -1,5 +1,7 @@
 package me.kanmodel.sep18.algorithm
 
+import me.kanmodel.sep18.algorithm.gui.MainFrame
+
 /**
  * Created with IntelliJ IDEA.
  * Description:

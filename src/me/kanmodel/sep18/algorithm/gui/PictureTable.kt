@@ -1,5 +1,7 @@
-package me.kanmodel.sep18.algorithm
+package me.kanmodel.sep18.algorithm.gui
 
+import me.kanmodel.sep18.algorithm.util.DataHolder
+import me.kanmodel.sep18.algorithm.print2D
 import java.awt.*
 import java.util.regex.Pattern
 import javax.swing.JFrame
@@ -44,12 +46,12 @@ class PictureTable(private var dim: Int) : AbstractTableModel() {
      * 从文件加载邻接矩阵数据
      */
     init {
-        val data = loadData()//加载原始数组
+//        val data = DataHolder.cost//加载原始数组
 //        dim = data.size - 1
         rowData = Array(dim) { IntArray(dim + 1) { 0 } }//添加一列后的数组
         for (i in 0 until dim) {
             for (j in 1..dim) {
-                rowData[i][j] = data[i][j - 1]
+                rowData[i][j] = DataHolder.cost[i][j - 1]
             }
         }
         columnNames = Array(dim + 1) { "" }
@@ -109,13 +111,14 @@ class PictureTable(private var dim: Int) : AbstractTableModel() {
                     aValue.toString().toInt()
                 }
         rowData[rowIndex][columnIndex] = real
-        val data = Array(dim) { IntArray(dim) { 0 } }
+//        val data = Array(dim) { IntArray(dim) { 0 } }
         for (i in 0 until dim) {
             for (j in 0 until dim) {
-                data[i][j] = rowData[i][j + 1]
+                DataHolder.cost[i][j] = rowData[i][j + 1]
             }
         }
-        saveData(data)
+//        saveData(data)
+        DataHolder.save(DataHolder.cost)
         fireTableCellUpdated(rowIndex, columnIndex)
     }
 
@@ -191,19 +194,19 @@ internal class RowHeaderRenderer : TableCellRenderer {
 var syncFlag = false
 
 
-fun showPictureTable(dim: Int = loadData().size) {
+fun showPictureTable(dim: Int = DataHolder.cost.size) {
     val jf = JFrame("无向图图-邻接矩阵")
     jf.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
     jf.addWindowListener(TableWindowListener(dim))//添加窗口事件监听
 
-    jf.contentPane = getTabelPane()
+    jf.contentPane = getTablePane()
     jf.pack()
     jf.setLocationRelativeTo(null)
     jf.iconImage = Toolkit.getDefaultToolkit().getImage("icon_tree.png")
     jf.isVisible = true
 }
 
-fun getTabelPane(dim: Int = loadData().size): JPanel {
+fun getTablePane(dim: Int = DataHolder.cost.size): JPanel {
     val panel = JPanel(BorderLayout())
 
     val table = JTable(PictureTable(dim))

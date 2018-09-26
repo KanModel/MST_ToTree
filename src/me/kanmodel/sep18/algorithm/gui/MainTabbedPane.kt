@@ -1,6 +1,6 @@
-package me.kanmodel.sep18.algorithm
+package me.kanmodel.sep18.algorithm.gui
 
-import org.omg.CORBA.Object
+import me.kanmodel.sep18.algorithm.getTreeFram
 import javax.swing.JTabbedPane
 
 /**
@@ -13,7 +13,7 @@ import javax.swing.JTabbedPane
 class MainTabbedPane : JTabbedPane() {
     init {
         addTab("欢迎", WelcomePane())
-        addTab("矩阵邻接矩阵", getTabelPane())
+        addTab("矩阵邻接矩阵", getTablePane())
         addTab("原图", null)
         addTab("最小生成树结果", null)
         selectedIndex = 0
