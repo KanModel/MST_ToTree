@@ -23,13 +23,13 @@ class TableWindowListener(val dim: Int = 1): WindowListener{
     }
 
     override fun windowClosing(e: WindowEvent?) {
-        val data = Array(dim) { IntArray(dim) { 0 } }
-        for (i in 0 until dim) {
-            for (j in 0 until dim) {
-                data[i][j] = rowData[i][j + 1]
-            }
-        }
-        print2D(data)
+//        val data = Array(dim) { IntArray(dim) { 0 } }
+//        for (i in 0 until dim) {
+//            for (j in 0 until dim) {
+//                data[i][j] = rowData[i][j + 1]
+//            }
+//        }
+//        print2D(data)
         DataHolder.save(DataHolder.cost)
     }
 

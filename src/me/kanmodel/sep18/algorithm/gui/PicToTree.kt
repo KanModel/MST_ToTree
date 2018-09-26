@@ -16,10 +16,11 @@ import javax.swing.*
  */
 
 const val RIDUS = 50
+const val COEFFICIENT = 1
 
 var count: Int = 1
 
-class TreeFrame(cost: Array<IntArray>? = null, coor: Array<IntArray>? = null, val dim: Int = 6) : JFrame("PicToTree") {
+class TreeFrame(cost: Array<IntArray>? = null, coor: Array<IntArray>? = null, val dim: Int = DataHolder.cost.size) : JFrame("PicToTree") {
     val flowLayout = FlowLayout()
     val mainPanel = JPanel(flowLayout)
     val scrollPane = JScrollPane(mainPanel)
@@ -40,21 +41,30 @@ class TreeFrame(cost: Array<IntArray>? = null, coor: Array<IntArray>? = null, va
         pack()
         setLocationRelativeTo(null)
         isResizable = false
-        setSize(640, 640)
+        setSize(1080, 720)
         setLocation(64, 64)
         iconImage = Toolkit.getDefaultToolkit().getImage("icon_tree.png")
     }
 
     fun addTreePanel(cost: Array<IntArray>, coor: Array<IntArray>) {
-        val treePanel: TreePanel = TreePanel(this, cost, coor, dim)
+        val treePanel: TreePanel = TreePanel(this, cost, dim = dim)
+//        val treePanel: TreePanel = TreePanel(this, cost, coor, dim)
         treePanel.add(JLabel("步骤${++count}"))
         treePanel.border = BorderFactory.createEmptyBorder(2, 5, 2, 5)
         mainPanel.add(treePanel)
 //        this.pack()
     }
+
+    fun addTreePanel(panel: JPanel) {
+        mainPanel.add(panel)
+    }
+
+    fun setMainSize(w: Int = 600, h: Int = 600){
+        mainPanel.preferredSize = Dimension(w, h)
+    }
 }
 
-class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private val coor: Array<IntArray>, val dim: Int = 6) : JPanel() {
+class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private val coor: Array<IntArray> = DataHolder.defaultCoordinateGenerate(), val dim: Int = DataHolder.cost.size) : JPanel() {
     init {
 //        background = Color.
 //        setSize(500, 500)
@@ -70,7 +80,7 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
         for (i in 0 until dim) {
             for (j in i + 1 until dim) {
                 if (cost[i][j] != Int.MAX_VALUE) {
-                    drawP2P(g, coor[i][0] * 100, coor[i][1] * 100, coor[j][0] * 100, coor[j][1] * 100, cost[i][j], (i + 1).toString(), (j + 1).toString())
+                    drawP2P(g, coor[i][0] * COEFFICIENT, coor[i][1] * COEFFICIENT, coor[j][0] * COEFFICIENT, coor[j][1] * COEFFICIENT, cost[i][j], (i + 1).toString(), (j + 1).toString())
                 }
             }
         }
@@ -110,46 +120,34 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
 
 }
 
-fun getTreePanel(cost: Array<IntArray> = DataHolder.cost, coor: Array<IntArray> = arrayOf(
-        intArrayOf(1, 1),
-        intArrayOf(3, 1),
-        intArrayOf(5, 2),
-        intArrayOf(1, 3),
-        intArrayOf(3, 3),
-        intArrayOf(2, 5)
-)): TreePanel {
+fun getTreePanel(cost: Array<IntArray> = DataHolder.cost, coor: Array<IntArray> = DataHolder.defaultCoordinateGenerate()): TreePanel {
     val treePanel: TreePanel = TreePanel(null, cost, coor, DataHolder.cost.size)
     treePanel.border = BorderFactory.createEmptyBorder(2, 5, 2, 5)
     return treePanel
 }
 
+fun getPicPanel(): JPanel {
+    val mainPanel = JPanel()
+    mainPanel.background = Color.gray
+    mainPanel.preferredSize = Dimension(600, 600)
+    mainPanel.border = BorderFactory.createEmptyBorder(0, 0, 0, 0)
+    mainPanel.add(getTreePanel())
+    return mainPanel
+}
+
 fun main(args: Array<String>) {
-/*    val cost = arrayOf(
-            intArrayOf(0, 10, Int.MAX_VALUE, 30, 45, Int.MAX_VALUE),
-            intArrayOf(10, 0, 50, Int.MAX_VALUE, 40, 25),
-            intArrayOf(Int.MAX_VALUE, 50, 0, Int.MAX_VALUE, 35, 15),
-            intArrayOf(30, Int.MAX_VALUE, Int.MAX_VALUE, 0, Int.MAX_VALUE, 20),
-            intArrayOf(45, 40, 35, Int.MAX_VALUE, 0, 55),
-            intArrayOf(Int.MAX_VALUE, 25, 15, 20, 55, 0)
-    )*/
     val cost = DataHolder.cost
-    val coor = arrayOf(
-            intArrayOf(1, 1),
-            intArrayOf(3, 1),
-            intArrayOf(5, 2),
-            intArrayOf(1, 3),
-            intArrayOf(3, 3),
-            intArrayOf(2, 5)
-    )
-    val frame = TreeFrame(cost, coor)
-    frame.contentPane = getTreePanel(cost, coor)
+//    val coor = arrayOf(
+//            intArrayOf(1, 1),
+//            intArrayOf(3, 1),
+//            intArrayOf(5, 2),
+//            intArrayOf(1, 3),
+//            intArrayOf(3, 3),
+//            intArrayOf(2, 5)
+//    )
+    val coor = DataHolder.defaultCoordinateGenerate()
+    val frame = TreeFrame()
+    frame.addTreePanel(getTreePanel())
+    frame.setMainSize()
     frame.isVisible = true
-/*    EventQueue.invokeLater {
-        // 创建窗口对象
-//        val frame = Main.MyFrame()
-        val frame = TreeFrame(cost, coor)
-//        frame.setSize(1080, 720)
-        // 显示窗口
-        frame.isVisible = true
-    }*/
 }

@@ -2,6 +2,7 @@ package me.kanmodel.sep18.algorithm
 
 import me.kanmodel.sep18.algorithm.gui.TreeFrame
 import me.kanmodel.sep18.algorithm.util.DataHolder
+import java.lang.IndexOutOfBoundsException
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,21 +13,13 @@ import me.kanmodel.sep18.algorithm.util.DataHolder
  */
 fun main(args: Array<String>) {
 //    val arg = Array(5){IntArray(5)}
-    getTreeFram().isVisible = true
+    getTreeFrame().isVisible = true
 }
 
-fun getTreeFram(): TreeFrame {
+fun getTreeFrame(): TreeFrame {
     val treeFrame = TreeFrame()
 
-    val dim = 6
-/*    val cost = arrayOf(
-            intArrayOf(0, 10, Int.MAX_VALUE, 30, 45, Int.MAX_VALUE),
-            intArrayOf(10, 0, 50, Int.MAX_VALUE, 40, 25),
-            intArrayOf(Int.MAX_VALUE, 50, 0, Int.MAX_VALUE, 35, 15),
-            intArrayOf(30, Int.MAX_VALUE, Int.MAX_VALUE, 0, Int.MAX_VALUE, 20),
-            intArrayOf(45, 40, 35, Int.MAX_VALUE, 0, 55),
-            intArrayOf(Int.MAX_VALUE, 25, 15, 20, 55, 0)
-    )*/
+    val dim = DataHolder.cost.size
     DataHolder.reload()
     val cost = DataHolder.cost
 
@@ -58,11 +51,8 @@ fun getTreeFram(): TreeFrame {
 
     picToTree[k][l] = cost[k][l]
     picToTree[l][k] = cost[k][l]
-//    TreeFrame(picToTree.copyOf(), coor).isVisible = true
-//    treeFrame.addTreePanel(copyArray(picToTree), coor)
     treeFrame.addTreePanel(Array(dim) { it -> picToTree[it].copyOf() }, coor)
     print2D(picToTree)
-//    Thread.sleep(100)
 
     minCost += cost[k][l]
     val tree: ArrayList<Edge> = ArrayList()
@@ -82,38 +72,40 @@ fun getTreeFram(): TreeFrame {
     near.forEach { print("$it ") }
     println()
 
-    for (i in 1 until dim - 1) {
-        var min = 0
-        var costTmp = Int.MAX_VALUE
-        for (j in 0 until dim) {
-            if (near[j] != 0) {
-                if (costTmp > cost[j][near[j] - 1]) {
-                    costTmp = cost[j][near[j] - 1]
-                    min = j
+    try {
+
+        for (i in 1 until dim - 1) {
+            var min = 0
+            var costTmp = Int.MAX_VALUE
+            for (j in 0 until dim) {
+                if (near[j] != 0) {
+                    if (costTmp > cost[j][near[j] - 1]) {
+                        costTmp = cost[j][near[j] - 1]
+                        min = j
+                    }
                 }
             }
-        }
-        println("最短路径权值${min + 1} - ${near[min]}：$costTmp")
-        minCost += costTmp
+            println("最短路径权值${min + 1} - ${near[min]}：$costTmp")
+            minCost += costTmp
 
-        picToTree[min][near[min] - 1] = cost[min][near[min] - 1]
-        picToTree[near[min] - 1][min] = cost[min][near[min] - 1]
-//        TreeFrame(picToTree.copyOf(), coor).isVisible = true
-        treeFrame.addTreePanel(Array(dim) { it -> picToTree[it].copyOf() }, coor)
-        print2D(picToTree)
-//        Thread.sleep(100)
+            picToTree[min][near[min] - 1] = cost[min][near[min] - 1]
+            picToTree[near[min] - 1][min] = cost[min][near[min] - 1]
+            treeFrame.addTreePanel(Array(dim) { it -> picToTree[it].copyOf() }, coor)
+            print2D(picToTree)
 
-        near[min] = 0
+            near[min] = 0
 
-        for (j in 0 until dim) {
-            if (near[j] != 0 && cost[j][near[j] - 1] > cost[j][min]) {
-                near[j] = min + 1
+            for (j in 0 until dim) {
+                if (near[j] != 0 && cost[j][near[j] - 1] > cost[j][min]) {
+                    near[j] = min + 1
+                }
             }
+            near.forEach { print("$it ") }
+            println()
         }
-        near.forEach { print("$it ") }
-        println()
+    } catch (e: IndexOutOfBoundsException) {
+        println(e)
     }
-//    treeFrame.isVisible = true
     return treeFrame
 }
 

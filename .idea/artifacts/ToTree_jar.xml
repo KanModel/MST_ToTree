@@ -8,6 +8,9 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/kotlin-test.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/kotlin-stdlib-jdk7.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/kotlin-stdlib-jdk8.jar" path-in-jar="/" />
+      <element id="directory" name="images">
+        <element id="file-copy" path="$PROJECT_DIR$/images/icon_tree.png" />
+      </element>
     </root>
   </artifact>
 </component>

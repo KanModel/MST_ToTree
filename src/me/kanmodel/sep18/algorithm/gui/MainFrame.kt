@@ -20,7 +20,8 @@ class MainFrame : JFrame() {
         isResizable = false
         setLocationRelativeTo(null)
         addWindowListener(TableWindowListener(DataHolder.cost.size))
-        iconImage = Toolkit.getDefaultToolkit().getImage("icon_tree.png")
+        title = "ToTree"
+        iconImage = Toolkit.getDefaultToolkit().getImage("images/icon_tree.png")
         contentPane = MainTabbedPane()
     }
 }
