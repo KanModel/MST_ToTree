@@ -1,10 +1,7 @@
 package me.kanmodel.sep18.algorithm.gui
 
 import me.kanmodel.sep18.algorithm.util.DataHolder
-import java.awt.Color
-import java.awt.Dimension
-import java.awt.FlowLayout
-import java.awt.Toolkit
+import java.awt.*
 import javax.swing.*
 
 /**
@@ -38,7 +35,9 @@ class TreeStepPanel(cost: Array<IntArray>? = null, coor: Array<IntArray>? = null
     fun addTreePanel(cost: Array<IntArray>, coor: Array<IntArray>) {
         val treePanel: TreePanel = TreePanel(null, cost, dim = dim)
 //        val treePanel: TreePanel = TreePanel(this, cost, coor, dim)
-        treePanel.add(JLabel("≤Ω÷Ë${++count}"))
+        val stepLabel = JLabel("≤Ω÷Ë${++count}")
+        stepLabel.font = Font(null, Font.PLAIN, 14)
+        treePanel.add(stepLabel)
         treePanel.border = BorderFactory.createEmptyBorder(2, 5, 2, 5)
         mainPanel.add(treePanel)
     }

@@ -2,6 +2,7 @@ package me.kanmodel.sep18.algorithm.gui
 
 import me.kanmodel.sep18.algorithm.getTreeFrame
 import me.kanmodel.sep18.algorithm.getTreeStepPanel
+import java.awt.Font
 import javax.swing.JTabbedPane
 
 /**
@@ -13,10 +14,12 @@ import javax.swing.JTabbedPane
  */
 class MainTabbedPanel : JTabbedPane() {
     init {
-        addTab("欢迎", WelcomePanel())
-        addTab("矩阵邻接矩阵", null)
-        addTab("原图", null)
-        addTab("最小生成树结果", null)
+        font = Font(null, Font.PLAIN, 18)
+//        addTab("欢迎", WelcomePanel())
+        addTab("欢迎", null, WelcomePanel(), "主界面")
+        addTab("矩阵邻接矩阵", null, null, "显示/编辑当前邻接矩阵")
+        addTab("原图", null, null, "根据当前邻接矩阵画出带权无向图")
+        addTab("最小生成树结果", null, null, "显示当前邻接矩阵下的最小生成树详细步骤")
         selectedIndex = 0
         addChangeListener {
             println("当前选中的选项卡index: $selectedIndex")
