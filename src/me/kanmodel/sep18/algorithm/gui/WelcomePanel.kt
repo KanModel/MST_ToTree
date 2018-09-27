@@ -11,7 +11,7 @@ import javax.swing.*
  * Date: 2018-09-25
  * Time: 14:26
  */
-class WelcomePane :JPanel() {
+class WelcomePanel :JPanel() {
     var pattern = Pattern.compile("^[-\\+]?[\\d]*$")
     init {
         val dimLabel = JLabel("当前邻接矩阵纬度: ${DataHolder.cost.size}")

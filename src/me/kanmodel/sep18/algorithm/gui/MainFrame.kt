@@ -22,6 +22,6 @@ class MainFrame : JFrame() {
         addWindowListener(TableWindowListener(DataHolder.cost.size))
         title = "ToTree"
         iconImage = Toolkit.getDefaultToolkit().getImage("images/icon_tree.png")
-        contentPane = MainTabbedPane()
+        contentPane = MainTabbedPanel()
     }
 }

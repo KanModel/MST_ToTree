@@ -1,6 +1,7 @@
 package me.kanmodel.sep18.algorithm.gui
 
 import me.kanmodel.sep18.algorithm.getTreeFrame
+import me.kanmodel.sep18.algorithm.getTreeStepPanel
 import javax.swing.JTabbedPane
 
 /**
@@ -10,9 +11,9 @@ import javax.swing.JTabbedPane
  * Date: 2018-09-25
  * Time: 14:20
  */
-class MainTabbedPane : JTabbedPane() {
+class MainTabbedPanel : JTabbedPane() {
     init {
-        addTab("欢迎", WelcomePane())
+        addTab("欢迎", WelcomePanel())
         addTab("矩阵邻接矩阵", null)
         addTab("原图", null)
         addTab("最小生成树结果", null)
@@ -22,7 +23,8 @@ class MainTabbedPane : JTabbedPane() {
             when (selectedIndex) {
                 1 -> setComponentAt(1, getTablePane())
                 2 -> setComponentAt(2, getPicPanel())
-                3 -> setComponentAt(3, getTreeFrame().scrollPane)
+//                3 -> setComponentAt(3, getTreeFrame().scrollPane)
+                3 -> setComponentAt(3, getTreeStepPanel().scrollPanel)
             }
         }
     }

@@ -1,0 +1,45 @@
+package me.kanmodel.sep18.algorithm.gui
+
+import me.kanmodel.sep18.algorithm.util.DataHolder
+import java.awt.Color
+import java.awt.Dimension
+import java.awt.FlowLayout
+import java.awt.Toolkit
+import javax.swing.*
+
+/**
+ * Created with IntelliJ IDEA.
+ * Description:
+ * User: kgdwhsk
+ * Date: 2018-09-26
+ * Time: 23:30
+ */
+class TreeStepPanel(cost: Array<IntArray>? = null, coor: Array<IntArray>? = null, val dim: Int = DataHolder.cost.size){
+    val flowLayout = FlowLayout()
+    val mainPanel = JPanel(flowLayout)
+    val scrollPanel = JScrollPane(mainPanel)
+    var count = 0
+
+    init {
+
+        flowLayout.vgap = 4
+        flowLayout.hgap = 0
+
+        mainPanel.background = Color.gray
+        mainPanel.preferredSize = Dimension(610, (dim - 1) * 604)
+        mainPanel.border = BorderFactory.createEmptyBorder(0, 0, 0, 0)
+        scrollPanel.setBounds(0, 0, 620, 610)
+        scrollPanel.verticalScrollBar.unitIncrement = 20//设置滚轮滚动速度
+
+        scrollPanel.setSize(1080, 720)
+        scrollPanel.setLocation(64, 64)
+    }
+
+    fun addTreePanel(cost: Array<IntArray>, coor: Array<IntArray>) {
+        val treePanel: TreePanel = TreePanel(null, cost, dim = dim)
+//        val treePanel: TreePanel = TreePanel(this, cost, coor, dim)
+        treePanel.add(JLabel("步骤${++count}"))
+        treePanel.border = BorderFactory.createEmptyBorder(2, 5, 2, 5)
+        mainPanel.add(treePanel)
+    }
+}
