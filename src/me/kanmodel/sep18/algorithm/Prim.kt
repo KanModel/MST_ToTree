@@ -18,7 +18,6 @@ class Prim{
 
         @JvmStatic
         fun main(args: Array<String>) {
-//    val arg = Array(5){IntArray(5)}
             getTreeFrame().isVisible = true
         }
 

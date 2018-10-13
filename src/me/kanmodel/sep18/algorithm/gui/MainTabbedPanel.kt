@@ -2,6 +2,7 @@ package me.kanmodel.sep18.algorithm.gui
 
 import me.kanmodel.sep18.algorithm.Prim.Companion.getTreeStepPanel
 import me.kanmodel.sep18.algorithm.gui.PictureTable.Companion.getTablePane
+import me.kanmodel.sep18.algorithm.gui.TreePanel.Companion.getPicPanel
 import me.kanmodel.sep18.algorithm.util.Log
 import java.awt.Font
 import javax.swing.JTabbedPane
@@ -25,10 +26,9 @@ class MainTabbedPanel : JTabbedPane() {
         addChangeListener {
             Log.i("当前选中的选项卡index: $selectedIndex")
             when (selectedIndex) {
-                1 -> setComponentAt(1, getTablePane())
-                2 -> setComponentAt(2, getPicPanel())
-//                3 -> setComponentAt(3, getTreeFrame().scrollPane)
-                3 -> setComponentAt(3, getTreeStepPanel().scrollPanel)
+                1 -> setComponentAt(1, getTablePane())//邻接矩阵表格
+                2 -> setComponentAt(2, getPicPanel())//原图
+                3 -> setComponentAt(3, getTreeStepPanel().scrollPanel)//步骤图
             }
         }
     }

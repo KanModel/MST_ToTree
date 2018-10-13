@@ -68,10 +68,22 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
     }
 
     companion object {
+        const val RIDUS = 50
+        const val COEFFICIENT = 1
+
         fun getTreePanel(cost: Array<IntArray> = DataHolder.cost, coor: Array<IntArray> = DataHolder.defaultCoordinateGenerate()): TreePanel {
             val treePanel: TreePanel = TreePanel(null, cost, coor, DataHolder.cost.size)
             treePanel.border = BorderFactory.createEmptyBorder(2, 5, 2, 5)
             return treePanel
+        }
+
+        fun getPicPanel(): JPanel {
+            val mainPanel = JPanel()
+            mainPanel.background = Color.gray
+            mainPanel.preferredSize = Dimension(600, 600)
+            mainPanel.border = BorderFactory.createEmptyBorder(0, 0, 0, 0)
+            mainPanel.add(getTreePanel())
+            return mainPanel
         }
     }
 }
