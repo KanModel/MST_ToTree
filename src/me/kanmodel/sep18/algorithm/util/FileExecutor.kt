@@ -3,6 +3,7 @@ package me.kanmodel.sep18.algorithm.util
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
+import java.io.FileReader
 
 /**
  * Created with IntelliJ IDEA.
@@ -59,20 +60,26 @@ object FileExecutor {
 
     fun loadData(): Array<IntArray> {
         val source = loadSourceData()
-        println("load :\n$source")
-        println("分割第一步")
-        val s1 = source.split("\n")
-        s1.forEach { s: String -> println(s) }
-//    println("第一步分割后分为 ${s1.size} 个部分")
+        Log.i("Load Source :\n$source")
+
+        Log.i("分割第一步")
+        val s1 = source.split("\n")//以\n为分隔符号
+        s1.forEach { s: String -> Log.i(s) }
         val data = Array(s1.size - 1) { IntArray(s1.size - 1) }
-        println("分割第二步")
-        for (i in 0 until s1.size - 1) {
-            val s2 = s1[i].split("\t")
-//        println("第二步分割后分为 ${s2.size} 个部分")
+
+        Log.i("分割第二步")
+        for (i in 0 until s1.size - 1) {//讲字符串转化为数字并存入邻接矩阵
+            val s2 = s1[i].split("\t")//以\t为分隔符号
             for (j in 0 until s1.size - 1) {
                 data[i][j] = s2[j].toInt()
             }
         }
+
+
+        for (i in 0 until s1.size - 1) {
+            data[i][i] = 0
+        }//对角线置0
+
         return data
     }
 }

@@ -1,6 +1,7 @@
 package me.kanmodel.sep18.algorithm
 
 import me.kanmodel.sep18.algorithm.gui.MainFrame
+import javax.swing.SwingUtilities
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,8 +11,12 @@ import me.kanmodel.sep18.algorithm.gui.MainFrame
  * Time: 14:07
  */
 object Main{
+    val isDebug = true
+
     @JvmStatic
     fun main(args: Array<String>){
-        MainFrame().isVisible = true
+        SwingUtilities.invokeLater {
+            MainFrame().isVisible = true
+        }
     }
 }

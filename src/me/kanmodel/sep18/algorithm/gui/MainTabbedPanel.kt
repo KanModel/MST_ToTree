@@ -1,7 +1,8 @@
 package me.kanmodel.sep18.algorithm.gui
 
-import me.kanmodel.sep18.algorithm.getTreeFrame
-import me.kanmodel.sep18.algorithm.getTreeStepPanel
+import me.kanmodel.sep18.algorithm.Prim.Companion.getTreeStepPanel
+import me.kanmodel.sep18.algorithm.gui.PictureTable.Companion.getTablePane
+import me.kanmodel.sep18.algorithm.util.Log
 import java.awt.Font
 import javax.swing.JTabbedPane
 
@@ -22,7 +23,7 @@ class MainTabbedPanel : JTabbedPane() {
         addTab("最小生成树结果", null, null, "显示当前邻接矩阵下的最小生成树详细步骤")
         selectedIndex = 0
         addChangeListener {
-            println("当前选中的选项卡index: $selectedIndex")
+            Log.i("当前选中的选项卡index: $selectedIndex")
             when (selectedIndex) {
                 1 -> setComponentAt(1, getTablePane())
                 2 -> setComponentAt(2, getPicPanel())

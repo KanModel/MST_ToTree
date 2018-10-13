@@ -1,7 +1,7 @@
 package me.kanmodel.sep18.algorithm.test
 
-import me.kanmodel.sep18.algorithm.print2D
 import me.kanmodel.sep18.algorithm.util.DataHolder
+import me.kanmodel.sep18.algorithm.util.DataHolder.print2D
 
 /**
  * Created with IntelliJ IDEA.

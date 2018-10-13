@@ -1,7 +1,7 @@
 package me.kanmodel.sep18.algorithm.gui
 
 import me.kanmodel.sep18.algorithm.util.DataHolder
-import me.kanmodel.sep18.algorithm.print2D
+import me.kanmodel.sep18.algorithm.util.DataHolder.print2D
 import java.awt.*
 import java.util.regex.Pattern
 import javax.swing.JFrame
@@ -26,16 +26,6 @@ import javax.swing.table.TableCellRenderer
  * Time: 15:00
  */
 
-
-/**
- * 表格内容数组[dim * (dim + 1)]
- */
-var rowData: Array<IntArray> = Array(1) { IntArray(1 + 1) { 0 } }
-
-/**
- * 表头（列名）
- */
-var columnNames = Array(1) { "" }
 
 /**
  * 表格类
@@ -65,7 +55,6 @@ class PictureTable(private var dim: Int) : AbstractTableModel() {
             columnNames[i] = i.toString()
         }
     }
-
 
     override fun getRowCount(): Int {
         return rowData.size
@@ -122,114 +111,60 @@ class PictureTable(private var dim: Int) : AbstractTableModel() {
         fireTableCellUpdated(rowIndex, columnIndex)
     }
 
-}
+    companion object {
+        //表格内容数组[dim * (dim + 1)]
+        var rowData: Array<IntArray> = Array(1) { IntArray(1 + 1) { 0 } }
+        //表头（列名）
+        var columnNames = Array(1) { "" }
 
-/**
- * 表格监听器
- * 监听表格内数据改变
- * 1、不允许数据方阵对角线数据改变
- * 2、不允许改变第一列标示行号的内容
- * 3、改变任意值后更改方阵对应对称数据
- */
-class TableListener(private val tableModel: TableModel) : TableModelListener {
+        /**
+         * 标识是否改变表格内容
+         * 防止陷入死循环调用事件（修改对应值本身也属于表格更新事件）
+         */
+        var syncFlag = false
 
-    override fun tableChanged(e: TableModelEvent?) {
-        val firstRow = e!!.firstRow
-        val lastRow = e.lastRow
+        fun showPictureTable(dim: Int = DataHolder.cost.size) {
+            val jf = JFrame("无向图图-邻接矩阵")
+            jf.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
+            jf.addWindowListener(TableWindowListener(dim))//添加窗口事件监听
 
-        val column = e.column
+            jf.contentPane = getTablePane()
+            jf.pack()
+            jf.setLocationRelativeTo(null)
+            jf.iconImage = Toolkit.getDefaultToolkit().getImage("icon_tree.png")
+            jf.isVisible = true
+        }
 
-        val type = e.type
+        fun getTablePane(dim: Int = DataHolder.cost.size): JPanel {
+            val panel = JPanel(BorderLayout())
 
+            val table = JTable(PictureTable(dim))
 
-        println("$firstRow $column ${tableModel.getValueAt(firstRow, column)} $type")
-
-        if (type == TableModelEvent.UPDATE) {
-            if ((firstRow + 1) == column || column == 0) {
-                return
+            table.columnModel.getColumn(0).cellRenderer = RowHeaderRenderer()//设置第一列格式
+            table.rowHeight = 20//设置行高 列宽
+            for (i in 0..dim) {
+                table.columnModel.getColumn(i).preferredWidth = 40
             }
 
-            if (!syncFlag) {
-                syncFlag = true
-                println("同步对角数值")
-                tableModel.setValueAt(tableModel.getValueAt(firstRow, column), column - 1, firstRow + 1)
-            } else {
-                syncFlag = false
-            }
+            table.tableHeader.resizingAllowed = true
+            val tableModel = table.model
+            tableModel.addTableModelListener(TableListener(tableModel))
+
+            panel.add(table.tableHeader, BorderLayout.NORTH)
+            panel.add(table, BorderLayout.CENTER)
+
+            return panel
+        }
+
+        @JvmStatic
+        fun main(args: Array<String>) {
+//    saveData()
+
+            showPictureTable()
+            println("Hello")
         }
 
     }
 
-}
 
-/**
- * 表格第一列样式
- * 保持与表头样式一致
- */
-internal class RowHeaderRenderer : TableCellRenderer {
-
-    private val label = JLabel()
-    override fun getTableCellRendererComponent(table: JTable, value: Any, isSelected: Boolean, hasFocus: Boolean, row: Int, column: Int): Component {
-        label.font = font
-        label.horizontalAlignment = SwingConstants.CENTER
-        label.text = value.toString()
-        label.isOpaque = true
-        label.foreground = fgc
-        label.background = bgc
-        return label
-    }
-
-    companion object {
-        // 获取表头的字体、前景色和背景色，用来将Label伪装成表头的样子
-        private val font = UIManager.get("TableHeader.font") as Font
-        private val fgc = UIManager.get("TableHeader.foreground") as Color
-        private val bgc = UIManager.get("TableHeader.background") as Color
-    }
-}
-
-/**
- * 标识是否改变表格内容
- * 防止陷入死循环调用事件（修改对应值本身也属于表格更新事件）
- */
-var syncFlag = false
-
-
-fun showPictureTable(dim: Int = DataHolder.cost.size) {
-    val jf = JFrame("无向图图-邻接矩阵")
-    jf.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
-    jf.addWindowListener(TableWindowListener(dim))//添加窗口事件监听
-
-    jf.contentPane = getTablePane()
-    jf.pack()
-    jf.setLocationRelativeTo(null)
-    jf.iconImage = Toolkit.getDefaultToolkit().getImage("icon_tree.png")
-    jf.isVisible = true
-}
-
-fun getTablePane(dim: Int = DataHolder.cost.size): JPanel {
-    val panel = JPanel(BorderLayout())
-
-    val table = JTable(PictureTable(dim))
-
-    table.columnModel.getColumn(0).cellRenderer = RowHeaderRenderer()//设置第一列格式
-    table.rowHeight = 20//设置行高 列宽
-    for (i in 0..dim) {
-        table.columnModel.getColumn(i).preferredWidth = 40
-    }
-
-    table.tableHeader.resizingAllowed = true
-    val tableModel = table.model
-    tableModel.addTableModelListener(TableListener(tableModel))
-
-    panel.add(table.tableHeader, BorderLayout.NORTH)
-    panel.add(table, BorderLayout.CENTER)
-
-    return panel
-}
-
-fun main(args: Array<String>) {
-//    saveData()
-
-    showPictureTable()
-    println("Hello")
 }

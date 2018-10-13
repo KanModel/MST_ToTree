@@ -1,7 +1,7 @@
 package me.kanmodel.sep18.algorithm.gui
 
 import me.kanmodel.sep18.algorithm.util.DataHolder
-import me.kanmodel.sep18.algorithm.print2D
+import me.kanmodel.sep18.algorithm.util.DataHolder.print2D
 import java.awt.event.WindowEvent
 import java.awt.event.WindowListener
 

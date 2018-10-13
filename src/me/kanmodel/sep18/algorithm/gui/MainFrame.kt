@@ -21,7 +21,7 @@ class MainFrame : JFrame() {
         setLocationRelativeTo(null)
         addWindowListener(TableWindowListener(DataHolder.cost.size))
         title = "ToTree"
-        iconImage = Toolkit.getDefaultToolkit().getImage("images/icon_tree.png")
+        iconImage = Toolkit.getDefaultToolkit().getImage("images/icon_tree.png")//todo jar
         contentPane = MainTabbedPanel()
     }
 }

@@ -21,7 +21,15 @@ object DataHolder {
     }
 
     fun changeDimension(newDim: Int) {
-        val newCost = Array(newDim) { IntArray(newDim) { Int.MAX_VALUE } }
+        val newCost = Array(newDim) { i ->
+            IntArray(newDim) { j ->
+                //                Int.MAX_VALUE
+                when (i == j) {
+                    true -> 0
+                    false -> Int.MAX_VALUE
+                }
+            }
+        }//todo 对角线为0
         if (newDim > cost.size) {
             for (i in 0 until cost.size) {
                 for (j in 0 until cost.size) {
@@ -63,5 +71,26 @@ object DataHolder {
 
     fun save(data: Array<IntArray> = cost) {
         saveData(data)
+    }
+
+    /**
+     * @param arg: 二维整型数组
+     * 输出二维数组
+     *
+     */
+    @JvmStatic
+    fun print2D(arg: Array<IntArray>) {
+        for (i in arg) {
+            for (j in i) {
+                if (j == Int.MAX_VALUE) {
+                    System.out.printf("%-2s ", "∞")
+//                print("∞ ")
+                } else {
+                    System.out.printf("%-3s ", j)
+//                print("$j ")
+                }
+            }
+            println()
+        }
     }
 }
