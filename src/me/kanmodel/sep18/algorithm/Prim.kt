@@ -28,14 +28,8 @@ class Prim{
             DataHolder.reload()
             val cost = DataHolder.cost
 
-            val coor = arrayOf(
-                    intArrayOf(1, 1),
-                    intArrayOf(3, 1),
-                    intArrayOf(5, 2),
-                    intArrayOf(1, 3),
-                    intArrayOf(3, 3),
-                    intArrayOf(2, 5)
-            )
+            val coor = DataHolder.coor
+//            val coor = DataHolder.defaultCoordinateGenerate()
 
             val picToTree = Array(dim) { IntArray(dim) { Int.MAX_VALUE } }
 

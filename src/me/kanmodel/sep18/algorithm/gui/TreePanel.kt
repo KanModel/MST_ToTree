@@ -17,8 +17,6 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
     private val weightList = ArrayList<Weight>()
 
     init {
-//        background = Color.
-//        setSize(500, 500)
         preferredSize = Dimension(600, 600)
     }
 
@@ -41,7 +39,7 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
                 }
             }
         }
-        g2d.color = Color.RED
+        g2d.color = Color.RED//权重字体使用红色
         weightList.forEach { g2d.drawString(it.w.toString(), it.x, it.y) }//稍后打印权重
     }
 
@@ -70,9 +68,7 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
         val g2d = g.create() as Graphics2D
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
         g2d.drawLine(x1 + RADIUS / 2, y1 + RADIUS / 2, x2 + RADIUS / 2, y2 + RADIUS / 2)
-//        g2d.color = Color.RED
         if (w != 0) {
-//            g2d.drawString(w.toString(), (x1 + x2 + RADIUS) / 2, (y1 + y2 + RADIUS) / 2)
             weightList.add(Weight((x1 + x2 + RADIUS) / 2, (y1 + y2 + RADIUS) / 2, w))//记录权重稍后打印
         }
         g2d.dispose()
@@ -93,7 +89,7 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
             mainPanel.background = Color.gray
             mainPanel.preferredSize = Dimension(600, 600)
             mainPanel.border = BorderFactory.createEmptyBorder(0, 0, 0, 0)
-            mainPanel.add(getTreePanel())
+            mainPanel.add(getTreePanel(coor = DataHolder.coor))
             return mainPanel
         }
     }

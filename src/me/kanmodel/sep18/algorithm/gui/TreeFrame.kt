@@ -41,7 +41,7 @@ class TreeFrame(cost: Array<IntArray>? = null, coor: Array<IntArray>? = null, va
     }
 
     fun addTreePanel(cost: Array<IntArray>, coor: Array<IntArray>) {
-        val treePanel: TreePanel = TreePanel(this, cost, dim = dim)
+        val treePanel: TreePanel = TreePanel(this, cost, coor, dim = dim)
 //        val treePanel: TreePanel = TreePanel(this, cost, coor, dim)
         treePanel.add(JLabel("≤Ω÷Ë${++count}"))
         treePanel.border = BorderFactory.createEmptyBorder(2, 5, 2, 5)
@@ -53,7 +53,7 @@ class TreeFrame(cost: Array<IntArray>? = null, coor: Array<IntArray>? = null, va
         mainPanel.add(panel)
     }
 
-    fun setMainSize(w: Int = 600, h: Int = 600){
+    fun setMainSize(w: Int = 600, h: Int = 600) {
         mainPanel.preferredSize = Dimension(w, h)
     }
 }

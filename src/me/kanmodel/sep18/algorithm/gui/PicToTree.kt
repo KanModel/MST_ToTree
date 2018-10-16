@@ -16,9 +16,9 @@ object PicToTree {
     @JvmStatic
     fun main(args: Array<String>) {
         val cost = DataHolder.cost
-        val coor = DataHolder.defaultCoordinateGenerate()
+        val coor = DataHolder.coor
         val frame = TreeFrame()
-        frame.addTreePanel(getTreePanel())
+        frame.addTreePanel(getTreePanel(coor = coor))
         frame.setMainSize()
         frame.isVisible = true
     }

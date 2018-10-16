@@ -127,4 +127,32 @@ object FileExecutor {
         fos.write(data.toByteArray())
         fos.close()
     }
+
+    fun loadCoordinateData(): Array<IntArray> {
+        val file = File("data\\coorData.txt")
+        if (!file.exists()) {
+            return DataHolder.defaultCoordinateGenerate()
+        }
+
+        val fileInputStream = FileInputStream(file)
+        val size = fileInputStream.available()
+
+        val buffer = ByteArray(size)
+        fileInputStream.read(buffer)
+        fileInputStream.close()
+
+        val source = String(buffer)
+
+        val s1 = source.split("\r\n")//以\n为分隔符号
+        val data = Array(s1.size - 1) { IntArray(2) }
+
+        for (i in 0 until s1.size - 1) {//讲字符串转化为数字并存入邻接矩阵
+            val s2 = s1[i].split("\t")//以\t为分隔符号
+            for (j in 0 until 2) {
+                data[i][j] = s2[j].toInt()
+            }
+        }
+
+        return data
+    }
 }

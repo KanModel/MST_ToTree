@@ -18,10 +18,12 @@ import kotlin.math.sin
 object DataHolder {
     var cost = loadData()
     var names = loadNamesData()
+    var coor = getCoordinate()
 
     fun reload() {
         cost = loadData()
         names = loadNamesData()
+        coor = getCoordinate()
     }
 
     fun changeDimension(newDim: Int) {
@@ -64,20 +66,16 @@ object DataHolder {
         reload()
     }
 
+    private fun getCoordinate(): Array<IntArray> {
+        return FileExecutor.loadCoordinateData()
+    }
+
     fun defaultCoordinateGenerate(): Array<IntArray> {
         val newCoor = Array(cost.size) { IntArray(2) }
         val radius = 200
         val xDeviation = 300
         val yDeviation = 300
         for (i in 0 until cost.size) {
-//            val deviation: Int = when (i % 3) {
-//                0 -> 1
-//                1 -> -1
-//                2 -> 2
-//                else -> {
-//                    1
-//                }
-//            }
             val angle: Double = 360.0 / cost.size * i
             println("x: ${cos(angle / 180 * PI) * radius} y: ${sin(angle / 180 * PI) * radius}")
             newCoor[i][0] = (cos(angle / 180 * PI) * radius).toInt() + xDeviation
@@ -105,10 +103,8 @@ object DataHolder {
             for (j in i) {
                 if (j == Int.MAX_VALUE) {
                     System.out.printf("%-2s ", "¡Þ")
-//                print("¡Þ ")
                 } else {
                     System.out.printf("%-3s ", j)
-//                print("$j ")
                 }
             }
             println()

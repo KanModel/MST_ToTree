@@ -1,6 +1,5 @@
 package me.kanmodel.sep18.algorithm.test
 
-import me.kanmodel.sep18.algorithm.util.DataHolder.print2D
 import me.kanmodel.sep18.algorithm.util.DataHolder
 import me.kanmodel.sep18.algorithm.util.FileExecutor
 
@@ -36,6 +35,22 @@ fun main(args: Array<String>) {
 //    val a = FileExecutor.loadNamesData()
 //    println()
 //    a[1] = "一教"
-    val a = Array<String>(14){"无"}
-    FileExecutor.saveNamesData(a)
+/*    val a = Array<String>(14){"无"}
+    FileExecutor.saveNamesData(a)*/
+
+    val a = FileExecutor.loadCoordinateData()
+    println()
+
+    printData(DataHolder.defaultCoordinateGenerate())
+}
+
+
+fun printData(data: Array<IntArray>){
+    for (i in data) {
+        for (j in i) {
+            print("$j\t")
+        }
+        println()
+    }
+
 }
