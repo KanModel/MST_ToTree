@@ -15,6 +15,7 @@ import javax.swing.JPanel
  */
 class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private val coor: Array<IntArray> = DataHolder.defaultCoordinateGenerate(), val dim: Int = DataHolder.cost.size) : JPanel() {
     private val weightList = ArrayList<Weight>()
+    private val nameList = ArrayList<Name>()
 
     init {
         preferredSize = Dimension(600, 600)
@@ -41,6 +42,8 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
         }
         g2d.color = Color.RED//权重字体使用红色
         weightList.forEach { g2d.drawString(it.w.toString(), it.x, it.y) }//稍后打印权重
+        g2d.color = Color.BLUE
+        nameList.forEach { g2d.drawString(it.name, it.x, it.y) }
     }
 
     private fun test(g: Graphics) {
@@ -59,8 +62,9 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
         g2d.color = Color.pink
         g2d.fillArc(x, y, RADIUS, RADIUS, 0, 360)
-        g2d.color = Color.BLACK
-        g2d.drawString(name, (x + RADIUS / 2 - 5), (y + RADIUS / 2 + 5))//打印名字
+        g2d.color = Color.BLUE
+        nameList.add(Name((x + RADIUS / 2 + 5), (y + RADIUS / 2 - 5), name))
+//        g2d.drawString(name, (x + RADIUS / 2 + 5), (y + RADIUS / 2 - 5))//打印名字
         g2d.dispose()
     }
 
@@ -75,7 +79,7 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
     }
 
     companion object {
-        const val RADIUS = 30
+        const val RADIUS = 6
         const val COEFFICIENT = 1
 
         fun getTreePanel(cost: Array<IntArray> = DataHolder.cost, coor: Array<IntArray> = DataHolder.defaultCoordinateGenerate()): TreePanel {
@@ -95,4 +99,5 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
     }
 
     data class Weight(val x: Int, val y: Int, val w: Int)
+    data class Name(val x: Int, val y: Int, val name: String)
 }
