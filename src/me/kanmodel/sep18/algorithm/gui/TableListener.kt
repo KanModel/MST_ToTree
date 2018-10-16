@@ -30,7 +30,7 @@ class TableListener(private val tableModel: TableModel) : TableModelListener {
         val type = e.type
 
 
-        println("$firstRow $column ${tableModel.getValueAt(firstRow, column)} $type")
+        println("$firstRow $column ${tableModel.getValueAt(firstRow, column)} $type")//输出行列号 内容 事件代号
 
         if (type == TableModelEvent.UPDATE) {
             if ((firstRow + 1) == column || column == 0) {

@@ -33,7 +33,11 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
         for (i in 0 until dim) {
             for (j in i + 1 until dim) {
                 if (cost[i][j] != Int.MAX_VALUE) {
-                    drawP2P(g, coor[i][0] * COEFFICIENT, coor[i][1] * COEFFICIENT, coor[j][0] * COEFFICIENT, coor[j][1] * COEFFICIENT, cost[i][j], (i + 1).toString(), (j + 1).toString())
+                    var firstName = (i + 1).toString()
+                    var secondName = (j + 1).toString()
+                    if (DataHolder.names[i] != "") firstName = DataHolder.names[i]
+                    if (DataHolder.names[j] != "") secondName = DataHolder.names[j]
+                    drawP2P(g, coor[i][0] * COEFFICIENT, coor[i][1] * COEFFICIENT, coor[j][0] * COEFFICIENT, coor[j][1] * COEFFICIENT, cost[i][j], firstName, secondName)
                 }
             }
         }
@@ -47,7 +51,6 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
     }
 
     private fun drawP2P(g: Graphics, x1: Int, y1: Int, x2: Int, y2: Int, w: Int = 0, firstName: String = "", secondName: String = "") {
-//        drawLine(g, x1, y1, x2, y2, w)
         drawLine(g, x1, y1, x2, y2, w)
         drawCircle(g, x1, y1, firstName)
         drawCircle(g, x2, y2, secondName)

@@ -3,7 +3,6 @@ package me.kanmodel.sep18.algorithm.util
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
-import java.io.FileReader
 
 /**
  * Created with IntelliJ IDEA.
@@ -81,5 +80,51 @@ object FileExecutor {
         }//对角线置0
 
         return data
+    }
+
+    private fun loadNamesSourceData(): String {
+        val file = File("data\\namesData.txt")
+        if (!file.exists()) {
+            saveNamesData()
+        }
+
+        val fileInputStream = FileInputStream(file)
+        val size = fileInputStream.available()
+
+        val buffer = ByteArray(size)
+        fileInputStream.read(buffer)
+        fileInputStream.close()
+
+        return String(buffer)
+    }
+
+    fun loadNamesData(): Array<String> {
+        val source = loadNamesSourceData()
+        Log.i("Load Names Source :\n$source")
+
+        val s1 = source.split("\n")//以\n为分隔符号
+        s1.forEach { s: String -> Log.i(s) }
+        val data = Array(s1.size - 1) { "" }
+        for (i in 0 until data.size) {
+            data[i] = s1[i]
+        }
+
+        return data
+    }
+
+    fun saveNamesData(names: Array<String> = Array(6) { "" }) {
+        val file = File("data\\namesData.txt")
+        if (!file.exists()) {
+            file.parentFile.mkdirs()
+        }
+
+        var data = ""
+        for (i in 0 until names.size) {
+            data += "${names[i]}\n"
+        }
+
+        val fos = FileOutputStream(file)
+        fos.write(data.toByteArray())
+        fos.close()
     }
 }

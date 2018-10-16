@@ -1,7 +1,9 @@
 package me.kanmodel.sep18.algorithm.util
 
 import me.kanmodel.sep18.algorithm.util.FileExecutor.loadData
+import me.kanmodel.sep18.algorithm.util.FileExecutor.loadNamesData
 import me.kanmodel.sep18.algorithm.util.FileExecutor.saveData
+import me.kanmodel.sep18.algorithm.util.FileExecutor.saveNamesData
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -15,9 +17,11 @@ import kotlin.math.sin
  */
 object DataHolder {
     var cost = loadData()
+    var names = loadNamesData()
 
     fun reload() {
         cost = loadData()
+        names = loadNamesData()
     }
 
     fun changeDimension(newDim: Int) {
@@ -44,6 +48,19 @@ object DataHolder {
             }
         }
         save(newCost)
+
+        val newNames: Array<String> = Array(newDim) { "" }
+        if (newDim > names.size) {
+            for (i in 0 until names.size) {
+                newNames[i] = names[i]
+            }
+        } else {
+            for (i in 0 until newDim) {
+                newNames[i] = names[i]
+            }
+        }
+
+        saveNamesData(newNames)
         reload()
     }
 
@@ -71,6 +88,10 @@ object DataHolder {
 
     fun save(data: Array<IntArray> = cost) {
         saveData(data)
+    }
+
+    fun saveNames(data: Array<String> = names) {
+        saveNamesData(data)
     }
 
     /**

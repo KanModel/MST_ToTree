@@ -2,6 +2,7 @@ package me.kanmodel.sep18.algorithm.test
 
 import me.kanmodel.sep18.algorithm.util.DataHolder.print2D
 import me.kanmodel.sep18.algorithm.util.DataHolder
+import me.kanmodel.sep18.algorithm.util.FileExecutor
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,10 +27,15 @@ fun main(args: Array<String>) {
         }
     }*/
 //    val data = loadData()
-    val data = DataHolder.cost
+/*    val data = DataHolder.cost
     data[0][2] = Int.MAX_VALUE
     data[2][0] = Int.MAX_VALUE
     print2D(data)
 //    saveData(data)
-    DataHolder.save()
+    DataHolder.save()*/
+//    val a = FileExecutor.loadNamesData()
+//    println()
+//    a[1] = "р╩╫л"
+    val a = Array<String>(14){"нч"}
+    FileExecutor.saveNamesData(a)
 }
