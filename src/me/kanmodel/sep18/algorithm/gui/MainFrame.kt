@@ -2,7 +2,10 @@ package me.kanmodel.sep18.algorithm.gui
 
 import me.kanmodel.sep18.algorithm.util.DataHolder
 import java.awt.Dimension
+import java.awt.Image
 import java.awt.Toolkit
+import java.net.URL
+import javax.swing.ImageIcon
 import javax.swing.JFrame
 import javax.swing.WindowConstants
 
@@ -22,6 +25,7 @@ class MainFrame : JFrame() {
         addWindowListener(TableWindowListener(DataHolder.cost.size))
         title = "ToTree"
         iconImage = Toolkit.getDefaultToolkit().getImage("images/icon_tree.png")//todo jar
+//        GUITest::class.java!!.getResource("/images/Snap1.jpg")
         contentPane = MainTabbedPanel()
     }
 }

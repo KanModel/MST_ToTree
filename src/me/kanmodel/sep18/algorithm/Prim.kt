@@ -21,7 +21,7 @@ class Prim{
             getTreeFrame().isVisible = true
         }
 
-        fun getTreeFrame(): TreeFrame {
+        private fun getTreeFrame(): TreeFrame {
             val treeFrame = TreeFrame()
 
             val dim = DataHolder.cost.size
@@ -121,14 +121,14 @@ class Prim{
             DataHolder.reload()
             val cost = DataHolder.cost
 
-            val coor = arrayOf(
+            /*val coor = arrayOf(
                     intArrayOf(1, 1),
                     intArrayOf(3, 1),
                     intArrayOf(5, 2),
                     intArrayOf(1, 3),
                     intArrayOf(3, 3),
                     intArrayOf(2, 5)
-            )
+            )*/
 
             val picToTree = Array(dim) { IntArray(dim) { Int.MAX_VALUE } }
 
@@ -149,7 +149,8 @@ class Prim{
 
             picToTree[k][l] = cost[k][l]
             picToTree[l][k] = cost[k][l]
-            treeStepPanel.addTreePanel(Array(dim) { it -> picToTree[it].copyOf() }, coor)
+//            treeStepPanel.addTreePanel(Array(dim) { it -> picToTree[it].copyOf() }, coor)
+            treeStepPanel.addTreePanel(Array(dim) { it -> picToTree[it].copyOf() })//第一步
             print2D(picToTree)
 
             minCost += cost[k][l]
@@ -171,7 +172,6 @@ class Prim{
             println()
 
             try {
-
                 for (i in 1 until dim - 1) {
                     var min = 0
                     var costTmp = Int.MAX_VALUE
@@ -188,7 +188,8 @@ class Prim{
 
                     picToTree[min][near[min] - 1] = cost[min][near[min] - 1]
                     picToTree[near[min] - 1][min] = cost[min][near[min] - 1]
-                    treeStepPanel.addTreePanel(Array(dim) { it -> picToTree[it].copyOf() }, coor)
+//                    treeStepPanel.addTreePanel(Array(dim) { it -> picToTree[it].copyOf() }, coor)
+                    treeStepPanel.addTreePanel(Array(dim) { it -> picToTree[it].copyOf() })//后续步骤
                     print2D(picToTree)
 
                     near[min] = 0

@@ -14,6 +14,8 @@ import javax.swing.JPanel
  * Time: 10:20
  */
 class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private val coor: Array<IntArray> = DataHolder.defaultCoordinateGenerate(), val dim: Int = DataHolder.cost.size) : JPanel() {
+    val weightList = ArrayList<Weight>()
+
     init {
 //        background = Color.
 //        setSize(500, 500)
@@ -26,6 +28,8 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
     }
 
     private fun drawPicture(g: Graphics) {
+        val g2d = g.create() as Graphics2D
+
         for (i in 0 until dim) {
             for (j in i + 1 until dim) {
                 if (cost[i][j] != Int.MAX_VALUE) {
@@ -33,6 +37,8 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
                 }
             }
         }
+        g2d.color = Color.RED
+        weightList.forEach { g2d.drawString(it.w.toString(), it.x, it.y) }//稍后打印权重
     }
 
     private fun test(g: Graphics) {
@@ -52,7 +58,7 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
         g2d.color = Color.pink
         g2d.fillArc(x, y, RIDUS, RIDUS, 0, 360)
         g2d.color = Color.BLACK
-        g2d.drawString(name, (x + RIDUS / 2 - 5), (y + RIDUS / 2 + 5))
+        g2d.drawString(name, (x + RIDUS / 2 - 5), (y + RIDUS / 2 + 5))//打印名字
         g2d.dispose()
     }
 
@@ -60,9 +66,10 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
         val g2d = g.create() as Graphics2D
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
         g2d.drawLine(x1 + 25, y1 + 25, x2 + 25, y2 + 25)
-        g2d.color = Color.RED
+//        g2d.color = Color.RED
         if (w != 0) {
-            g2d.drawString(w.toString(), (x1 + x2 + RIDUS) / 2, (y1 + y2 + RIDUS) / 2)
+//            g2d.drawString(w.toString(), (x1 + x2 + RIDUS) / 2, (y1 + y2 + RIDUS) / 2)
+            weightList.add(Weight((x1 + x2 + RIDUS) / 2, (y1 + y2 + RIDUS) / 2, w))//记录权重稍后打印
         }
         g2d.dispose()
     }
@@ -86,4 +93,6 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
             return mainPanel
         }
     }
+
+    data class Weight(val x: Int, val y: Int, val w: Int)
 }
