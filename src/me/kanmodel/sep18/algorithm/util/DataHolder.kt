@@ -1,5 +1,7 @@
 package me.kanmodel.sep18.algorithm.util
 
+import me.kanmodel.sep18.algorithm.gui.TreePanel.Companion.PIC_HEIGHT
+import me.kanmodel.sep18.algorithm.gui.TreePanel.Companion.PIC_WIDTH
 import me.kanmodel.sep18.algorithm.util.FileExecutor.loadData
 import me.kanmodel.sep18.algorithm.util.FileExecutor.loadNamesData
 import me.kanmodel.sep18.algorithm.util.FileExecutor.saveCoordinateData
@@ -74,9 +76,9 @@ object DataHolder {
 
     fun defaultCoordinateGenerate(dim: Int = cost.size): Array<IntArray> {
         val newCoor = Array(dim) { IntArray(2) }
-        val radius = 200
-        val xDeviation = 300
-        val yDeviation = 300
+        val radius = 250
+        val xDeviation = PIC_WIDTH/2
+        val yDeviation = PIC_HEIGHT/2
         for (i in 0 until dim) {
             val angle: Double = 360.0 / dim * i
             println("x: ${cos(angle / 180 * PI) * radius} y: ${sin(angle / 180 * PI) * radius}")

@@ -18,7 +18,7 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
     private val nameList = ArrayList<Name>()
 
     init {
-        preferredSize = Dimension(600, 600)
+        preferredSize = Dimension(PIC_WIDTH, PIC_HEIGHT)
     }
 
     override fun paintComponent(g: Graphics?) {
@@ -79,11 +79,13 @@ class TreePanel(val frame: JFrame?, private val cost: Array<IntArray>, private v
     }
 
     companion object {
+        const val PIC_WIDTH = 920
+        const val PIC_HEIGHT = 600
         const val RADIUS = 6
         const val COEFFICIENT = 1
 
-        fun getTreePanel(cost: Array<IntArray> = DataHolder.cost, coor: Array<IntArray> = DataHolder.defaultCoordinateGenerate()): TreePanel {
-            val treePanel: TreePanel = TreePanel(null, cost, coor, DataHolder.cost.size)
+        fun getTreePanel(cost: Array<IntArray> = DataHolder.cost, coor: Array<IntArray> = DataHolder.defaultCoordinateGenerate(), dim: Int = DataHolder.cost.size): TreePanel {
+            val treePanel: TreePanel = TreePanel(null, cost, coor, dim)
             treePanel.border = BorderFactory.createEmptyBorder(2, 5, 2, 5)
             return treePanel
         }

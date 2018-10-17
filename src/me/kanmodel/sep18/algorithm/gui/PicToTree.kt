@@ -15,10 +15,16 @@ object PicToTree {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        val cost = DataHolder.cost
-        val coor = DataHolder.coor
+        val cost = arrayOf(
+                intArrayOf(0, 3),
+                intArrayOf(3, 0)
+        )
+        val coor = arrayOf(
+                intArrayOf(0, 0),
+                intArrayOf(592, 592)
+        )
         val frame = TreeFrame()
-        frame.addTreePanel(getTreePanel(coor = coor))
+        frame.addTreePanel(getTreePanel(coor = coor, cost = cost, dim = 2))
         frame.setMainSize()
         frame.isVisible = true
     }
