@@ -11,9 +11,9 @@ import javax.swing.*
  * Date: 2018-09-26
  * Time: 23:30
  */
-class TreeStepPanel(cost: Array<IntArray>? = null, coor: Array<IntArray>? = null, val dim: Int = DataHolder.cost.size) {
-    val flowLayout = FlowLayout()
-    val mainPanel = JPanel(flowLayout)
+class TreeStepPanel(private val dim: Int = DataHolder.cost.size) {
+    private val flowLayout = FlowLayout()
+    private val mainPanel = JPanel(flowLayout)
     val scrollPanel = JScrollPane(mainPanel)
     var count = 0
 

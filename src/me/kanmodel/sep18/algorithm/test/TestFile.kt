@@ -39,7 +39,7 @@ fun main(args: Array<String>) {
     FileExecutor.saveNamesData(a)*/
 
     val a = FileExecutor.loadCoordinateData()
-    println()
+    println(a.size)
 
     printData(DataHolder.defaultCoordinateGenerate())
 }

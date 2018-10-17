@@ -64,6 +64,7 @@ object DataHolder {
         }
 
         saveNamesData(newNames)
+        saveCoor(defaultCoordinateGenerate(newDim))
         reload()
     }
 
@@ -71,13 +72,13 @@ object DataHolder {
         return FileExecutor.loadCoordinateData()
     }
 
-    fun defaultCoordinateGenerate(): Array<IntArray> {
-        val newCoor = Array(cost.size) { IntArray(2) }
+    fun defaultCoordinateGenerate(dim: Int = cost.size): Array<IntArray> {
+        val newCoor = Array(dim) { IntArray(2) }
         val radius = 200
         val xDeviation = 300
         val yDeviation = 300
-        for (i in 0 until cost.size) {
-            val angle: Double = 360.0 / cost.size * i
+        for (i in 0 until dim) {
+            val angle: Double = 360.0 / dim * i
             println("x: ${cos(angle / 180 * PI) * radius} y: ${sin(angle / 180 * PI) * radius}")
             newCoor[i][0] = (cos(angle / 180 * PI) * radius).toInt() + xDeviation
             newCoor[i][1] = (sin(angle / 180 * PI) * radius).toInt() + yDeviation
