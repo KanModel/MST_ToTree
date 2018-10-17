@@ -1,7 +1,10 @@
 package me.kanmodel.sep18.algorithm.gui
 
 import me.kanmodel.sep18.algorithm.util.DataHolder
+import me.kanmodel.sep18.algorithm.util.FileExecutor
+import java.awt.Component
 import java.awt.Font
+import java.io.File
 import java.util.regex.Pattern
 import javax.swing.*
 
@@ -26,9 +29,9 @@ class WelcomePanel :JPanel() {
 
         val dimLabel = JLabel("当前邻接矩阵纬度: ${DataHolder.cost.size}")
         dimLabel.font = Font(null, Font.BOLD, 30)
-        val btn_changeDim = JButton("更改维度")
-        btn_changeDim.font = Font(null, Font.ITALIC, 30)
-        btn_changeDim.addActionListener{
+        val btnChangeDim = JButton("更改维度")
+        btnChangeDim.font = Font(null, Font.ITALIC, 30)
+        btnChangeDim.addActionListener{
             val result = JOptionPane.showInputDialog(
                     this,
                     "输入新的维度",
@@ -47,7 +50,37 @@ class WelcomePanel :JPanel() {
         val welcomeLabel = JLabel("<html><p>欢迎使用</p><p>最小生成树生成器</p></html>")
         welcomeLabel.font = Font(null, Font.BOLD, 64)
         hBox01.add(dimLabel)
-        hBox01.add(btn_changeDim)
+        hBox01.add(btnChangeDim)
         hBox02.add(welcomeLabel)
+
+        val btnImportFile = JButton("加载数据")
+        btnImportFile.font = Font(null, Font.ITALIC, 30)
+        btnImportFile.addActionListener {
+            showFileOpenDialog(this)
+            dimLabel.text = "当前邻接矩阵纬度: ${DataHolder.cost.size}"
+        }
+
+        hBox01.add(Box.createHorizontalStrut(10))
+        hBox01.add(btnImportFile)
+    }
+
+    companion object {
+        fun showFileOpenDialog(parent: Component) {
+            val fileChooser = JFileChooser()
+
+            fileChooser.currentDirectory = File(".")
+
+            fileChooser.fileSelectionMode = JFileChooser.FILES_AND_DIRECTORIES
+            fileChooser.isMultiSelectionEnabled = false
+
+            val result = fileChooser.showOpenDialog(parent)
+
+            if (result == JFileChooser.APPROVE_OPTION) {
+                val file = fileChooser.selectedFile
+
+                println("FILE: ${file.absolutePath}")
+                FileExecutor.readFile(file)
+            }
+        }
     }
 }
