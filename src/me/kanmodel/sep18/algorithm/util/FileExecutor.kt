@@ -143,7 +143,7 @@ object FileExecutor {
 
         val source = String(buffer)
 
-        val s1 = source.split("\r\n")//以\n为分隔符号
+        val s1 = source.split("\n")//以\n为分隔符号
         val data = Array(s1.size - 1) { IntArray(2) }
 
         for (i in 0 until s1.size - 1) {//讲字符串转化为数字并存入邻接矩阵
@@ -154,5 +154,24 @@ object FileExecutor {
         }
 
         return data
+    }
+
+    fun saveCoordinateData(coor: Array<IntArray> = DataHolder.defaultCoordinateGenerate()) {
+        val file = File("data\\coorData.txt")
+        if (!file.exists()) {
+            file.parentFile.mkdirs()
+        }
+
+        var data = ""
+        for (i in 0 until coor.size) {
+            for (j in 0 until 2) {
+                data += "${coor[i][j]}\t"
+            }
+            data += "\n"
+        }
+
+        val fos = FileOutputStream(file)
+        fos.write(data.toByteArray())
+        fos.close()
     }
 }

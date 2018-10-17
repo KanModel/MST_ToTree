@@ -31,6 +31,8 @@ class TableWindowListener(val dim: Int = 1): WindowListener{
 //        }
 //        print2D(data)
         DataHolder.save(DataHolder.cost)
+        DataHolder.saveCoor(DataHolder.coor)
+        DataHolder.saveNames(DataHolder.names)
     }
 
     override fun windowClosed(e: WindowEvent?) {}

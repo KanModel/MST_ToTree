@@ -2,6 +2,7 @@ package me.kanmodel.sep18.algorithm.util
 
 import me.kanmodel.sep18.algorithm.util.FileExecutor.loadData
 import me.kanmodel.sep18.algorithm.util.FileExecutor.loadNamesData
+import me.kanmodel.sep18.algorithm.util.FileExecutor.saveCoordinateData
 import me.kanmodel.sep18.algorithm.util.FileExecutor.saveData
 import me.kanmodel.sep18.algorithm.util.FileExecutor.saveNamesData
 import kotlin.math.PI
@@ -90,6 +91,10 @@ object DataHolder {
 
     fun saveNames(data: Array<String> = names) {
         saveNamesData(data)
+    }
+
+    fun saveCoor(data: Array<IntArray> = coor) {
+        saveCoordinateData(data)
     }
 
     /**

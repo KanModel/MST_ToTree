@@ -1,23 +1,13 @@
 package me.kanmodel.sep18.algorithm.gui
 
-import com.sun.xml.internal.fastinfoset.util.StringArray
 import me.kanmodel.sep18.algorithm.util.DataHolder
-import me.kanmodel.sep18.algorithm.util.DataHolder.print2D
-import me.kanmodel.sep18.algorithm.util.FileExecutor
 import java.awt.*
 import java.util.regex.Pattern
 import javax.swing.JFrame
 import javax.swing.JPanel
 import javax.swing.JTable
 import javax.swing.WindowConstants
-import javax.swing.event.TableModelEvent
-import javax.swing.event.TableModelListener
 import javax.swing.table.AbstractTableModel
-import javax.swing.table.TableModel
-import javax.swing.SwingConstants
-import javax.swing.UIManager
-import javax.swing.JLabel
-import javax.swing.table.TableCellRenderer
 
 
 /**
@@ -30,16 +20,15 @@ import javax.swing.table.TableCellRenderer
 
 
 /**
- * 表格类
+ * 邻接矩阵表格类
+ * ADM Adjacency Matrix
  */
-class PictureTable(private var dim: Int) : AbstractTableModel() {
+class PictureADMTable(private var dim: Int) : AbstractTableModel() {
 
     /**
      * 从文件加载邻接矩阵数据
      */
     init {
-//        val data = DataHolder.cost//加载原始数组
-//        dim = data.size - 1
         rowData = Array(dim) { IntArray(dim + 1) { 0 } }//添加一列后的数组
         for (i in 0 until dim) {
             for (j in 1..dim) {
@@ -49,8 +38,6 @@ class PictureTable(private var dim: Int) : AbstractTableModel() {
         for (i in 0 until dim) {
             rowData[i][0] = i + 1
         }
-
-//        print2D(rowData)
 
         columnNames = Array(dim + 2) { "" }//列名初始化
         columnNames[1] = "名称"
@@ -72,7 +59,6 @@ class PictureTable(private var dim: Int) : AbstractTableModel() {
     }
 
     override fun getValueAt(rowIndex: Int, columnIndex: Int): Any {
-//        if (columnIndex < columnCount - 1) {
         return if (columnIndex in 2 until columnCount && rowIndex in 1 until rowCount) {
             if (rowData[rowIndex - 1][columnIndex - 1] == Int.MAX_VALUE) {
                 "∞"
@@ -137,13 +123,11 @@ class PictureTable(private var dim: Int) : AbstractTableModel() {
                         aValue.toString().toInt()
                     }
             rowData[rowIndex - 1][columnIndex - 1] = real
-//        val data = Array(dim) { IntArray(dim) { 0 } }
             for (i in 0 until dim) {
                 for (j in 0 until dim) {
                     DataHolder.cost[i][j] = rowData[i][j + 1]
                 }
             }
-//        saveData(data)
             DataHolder.save()
         }
         fireTableCellUpdated(rowIndex, columnIndex)
@@ -163,22 +147,22 @@ class PictureTable(private var dim: Int) : AbstractTableModel() {
          */
         var syncFlag = false
 
-        fun showPictureTable(dim: Int = DataHolder.cost.size) {
+        private fun showADMPictureTable(dim: Int = DataHolder.cost.size) {
             val jf = JFrame("无向图图-邻接矩阵")
             jf.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
             jf.addWindowListener(TableWindowListener(dim))//添加窗口事件监听
 
-            jf.contentPane = getTablePane()
+            jf.contentPane = getADMTablePane()
             jf.pack()
             jf.setLocationRelativeTo(null)
             jf.iconImage = Toolkit.getDefaultToolkit().getImage("icon_tree.png")
             jf.isVisible = true
         }
 
-        fun getTablePane(dim: Int = DataHolder.cost.size): JPanel {
+        fun getADMTablePane(dim: Int = DataHolder.cost.size): JPanel {
             val panel = JPanel(BorderLayout())
 
-            val table = JTable(PictureTable(dim))
+            val table = JTable(PictureADMTable(dim))
 
             table.columnModel.getColumn(0).cellRenderer = RowHeaderRenderer()//设置第一列格式
             table.rowHeight = 20//设置行高 列宽
@@ -188,7 +172,7 @@ class PictureTable(private var dim: Int) : AbstractTableModel() {
 
             table.tableHeader.resizingAllowed = true
             val tableModel = table.model
-            tableModel.addTableModelListener(TableListener(tableModel))
+            tableModel.addTableModelListener(ADMTableListener(tableModel))
 
             panel.add(table.tableHeader, BorderLayout.NORTH)
             panel.add(table, BorderLayout.CENTER)
@@ -198,9 +182,7 @@ class PictureTable(private var dim: Int) : AbstractTableModel() {
 
         @JvmStatic
         fun main(args: Array<String>) {
-//    saveData()
-
-            showPictureTable()
+            showADMPictureTable()
             println("Hello")
         }
 
