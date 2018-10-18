@@ -51,8 +51,8 @@ class WelcomePanel :JPanel() {
                 }
             }
         }
-        val welcomeLabel = JLabel("<html><p>欢迎使用</p><p>最小生成树生成器</p></html>")
-        welcomeLabel.font = Font(null, Font.BOLD, 64)
+        val welcomeLabel = JLabel("<html><p>欢迎使用</p><p>最小生成树生成器</p><p>邻接矩阵中输入<p/><p>m,max,∞<p/><p>代表正无穷<p/></html>")
+        welcomeLabel.font = Font(null, Font.BOLD, 40)
         hBox01.add(dimLabel)
         hBox01.add(Box.createHorizontalStrut(10))
         hBox01.add(btnChangeDim)
