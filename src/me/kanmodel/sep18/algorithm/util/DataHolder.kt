@@ -19,9 +19,13 @@ import kotlin.math.sin
  * Time: 17:54
  */
 object DataHolder {
+    const val PRIM = 0
+    const val KRUSKAL = 1
+
     var cost = loadData()
     var names = loadNamesData()
     var coor = getCoordinate()
+    var algorithmSelect = PRIM;//Ä¬ÈÏÑ¡ÔñËã·¨
 
     fun reload() {
         cost = loadData()

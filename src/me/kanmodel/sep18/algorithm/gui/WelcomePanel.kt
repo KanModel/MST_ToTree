@@ -1,9 +1,12 @@
 package me.kanmodel.sep18.algorithm.gui
 
 import me.kanmodel.sep18.algorithm.util.DataHolder
+import me.kanmodel.sep18.algorithm.util.DataHolder.KRUSKAL
+import me.kanmodel.sep18.algorithm.util.DataHolder.PRIM
 import me.kanmodel.sep18.algorithm.util.FileExecutor
 import java.awt.Component
 import java.awt.Font
+import java.awt.event.ItemEvent
 import java.io.File
 import java.util.regex.Pattern
 import javax.swing.*
@@ -22,9 +25,10 @@ class WelcomePanel :JPanel() {
         add(mainBox)
 
         val hBox01 = Box.createHorizontalBox()
+        val hBox03 = Box.createHorizontalBox()
         val hBox02 = Box.createHorizontalBox()
         mainBox.add(hBox01)
-        mainBox.add(Box.createVerticalGlue())
+        mainBox.add(hBox03)
         mainBox.add(hBox02)
 
         val dimLabel = JLabel("当前邻接矩阵纬度: ${DataHolder.cost.size}")
@@ -50,6 +54,7 @@ class WelcomePanel :JPanel() {
         val welcomeLabel = JLabel("<html><p>欢迎使用</p><p>最小生成树生成器</p></html>")
         welcomeLabel.font = Font(null, Font.BOLD, 64)
         hBox01.add(dimLabel)
+        hBox01.add(Box.createHorizontalStrut(10))
         hBox01.add(btnChangeDim)
         hBox02.add(welcomeLabel)
 
@@ -59,9 +64,32 @@ class WelcomePanel :JPanel() {
             showFileOpenDialog(this)
             dimLabel.text = "当前邻接矩阵纬度: ${DataHolder.cost.size}"
         }
-
         hBox01.add(Box.createHorizontalStrut(10))
         hBox01.add(btnImportFile)
+
+        val algorithmSelectLabel = JLabel("算法选择: ")
+        algorithmSelectLabel.font = Font(null, Font.BOLD, 30)
+        val radioBtn1 = JRadioButton("Prim")
+        radioBtn1.font = Font(null, Font.ITALIC, 30)
+        val radioBtn2 = JRadioButton("Kruskal")
+        radioBtn2.font = Font(null, Font.ITALIC, 30)
+        radioBtn1.addItemListener {
+            if (it.stateChange == ItemEvent.SELECTED) {
+                println("选择${radioBtn1.text}算法")
+                DataHolder.algorithmSelect = PRIM
+            } else {
+                println("选择${radioBtn2.text}算法")
+                DataHolder.algorithmSelect = KRUSKAL
+            }
+        }
+        val btnGroup = ButtonGroup()
+        btnGroup.add(radioBtn1)
+        btnGroup.add(radioBtn2)
+        radioBtn1.isSelected = true
+
+        hBox03.add(algorithmSelectLabel)
+        hBox03.add(radioBtn1)
+        hBox03.add(radioBtn2)
     }
 
     companion object {

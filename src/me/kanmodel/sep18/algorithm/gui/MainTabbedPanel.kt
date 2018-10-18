@@ -1,9 +1,12 @@
 package me.kanmodel.sep18.algorithm.gui
 
-import me.kanmodel.sep18.algorithm.Prim.Companion.getTreeStepPanel
+import me.kanmodel.sep18.algorithm.Kruskal
+import me.kanmodel.sep18.algorithm.Prim
 import me.kanmodel.sep18.algorithm.gui.CoorTable.Companion.getCoorTablePane
 import me.kanmodel.sep18.algorithm.gui.PictureADMTable.Companion.getADMTablePane
 import me.kanmodel.sep18.algorithm.gui.TreePanel.Companion.getPicPanel
+import me.kanmodel.sep18.algorithm.util.DataHolder
+import me.kanmodel.sep18.algorithm.util.DataHolder.PRIM
 import me.kanmodel.sep18.algorithm.util.Log
 import java.awt.Font
 import javax.swing.JTabbedPane
@@ -32,7 +35,13 @@ class MainTabbedPanel : JTabbedPane() {
                 TABLE -> setComponentAt(TABLE, getADMTablePane())//邻接矩阵表格
                 COORDINATE_TABLE -> setComponentAt(COORDINATE_TABLE, getCoorTablePane())//邻接矩阵表格
                 SOURCE_PICTURE -> setComponentAt(SOURCE_PICTURE, getPicPanel())//原图
-                STEP_PICTURE -> setComponentAt(STEP_PICTURE, getTreeStepPanel().scrollPanel)//步骤图
+                STEP_PICTURE -> {
+                    if (DataHolder.algorithmSelect == PRIM) {
+                        setComponentAt(STEP_PICTURE, Prim.getTreeStepPanel().scrollPanel)//步骤图
+                    } else {
+                        setComponentAt(STEP_PICTURE, Kruskal.getTreeStepPanel().scrollPanel)//步骤图
+                    }
+                }
             }
         }
     }
