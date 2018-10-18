@@ -55,7 +55,7 @@ class CoorTable : AbstractTableModel() {
     }
 
     override fun isCellEditable(rowIndex: Int, columnIndex: Int): Boolean {
-        return true
+        return columnIndex in 2..3
     }
 
     companion object {

@@ -34,7 +34,7 @@ class WelcomePanel :JPanel() {
         val dimLabel = JLabel("当前邻接矩阵纬度: ${DataHolder.cost.size}")
         dimLabel.font = Font(null, Font.BOLD, 30)
         val btnChangeDim = JButton("更改维度")
-        btnChangeDim.font = Font(null, Font.ITALIC, 30)
+        btnChangeDim.font = Font(null, Font.BOLD, 30)
         btnChangeDim.addActionListener{
             val result = JOptionPane.showInputDialog(
                     this,
@@ -59,7 +59,7 @@ class WelcomePanel :JPanel() {
         hBox02.add(welcomeLabel)
 
         val btnImportFile = JButton("加载数据")
-        btnImportFile.font = Font(null, Font.ITALIC, 30)
+        btnImportFile.font = Font(null, Font.BOLD, 30)
         btnImportFile.addActionListener {
             showFileOpenDialog(this)
             dimLabel.text = "当前邻接矩阵纬度: ${DataHolder.cost.size}"
