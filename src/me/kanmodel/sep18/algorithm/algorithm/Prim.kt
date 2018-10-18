@@ -1,4 +1,4 @@
-package me.kanmodel.sep18.algorithm
+package me.kanmodel.sep18.algorithm.algorithm
 
 import me.kanmodel.sep18.algorithm.gui.TreeFrame
 import me.kanmodel.sep18.algorithm.gui.TreeStepPanel
@@ -199,6 +199,8 @@ class Prim{
             } catch (e: IndexOutOfBoundsException) {
                 println(e)
             }
+            println("×î¶ÌÂ·¾¶: $minCost")
+            treeStepPanel.addResultPanel(minCost)
             return treeStepPanel
         }
 

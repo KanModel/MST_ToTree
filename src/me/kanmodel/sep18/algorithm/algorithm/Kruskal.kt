@@ -1,4 +1,4 @@
-package me.kanmodel.sep18.algorithm
+package me.kanmodel.sep18.algorithm.algorithm
 
 import me.kanmodel.sep18.algorithm.gui.TreeFrame
 import me.kanmodel.sep18.algorithm.gui.TreeStepPanel
@@ -125,6 +125,7 @@ class Kruskal {
                     parent[fir] = sec
                     println("连接最短路径${i + 1}--${j + 1}")
                     tarCost[i][j] = newCost[i][j]
+                    minCost += newCost[i][j]
                     return true
                 } else {
                     cost[i][j] = Int.MAX_VALUE
@@ -143,8 +144,8 @@ class Kruskal {
                     treeStepPanel.addTreePanel(Array(dim) { it -> tarCost[it].copyOf() }, DataHolder.coor)
                 }
             }
-//*********************//*********************//*********************
-
+            println("最短路径: $minCost")
+            treeStepPanel.addResultPanel(minCost)
             return treeStepPanel
         }
 

@@ -1,5 +1,6 @@
 package me.kanmodel.sep18.algorithm.gui
 
+import me.kanmodel.sep18.algorithm.gui.TreePanel.Companion.PIC_WIDTH
 import me.kanmodel.sep18.algorithm.util.DataHolder
 import java.awt.*
 import javax.swing.*
@@ -23,7 +24,7 @@ class TreeStepPanel(private val dim: Int = DataHolder.cost.size) {
         flowLayout.hgap = 0
 
         mainPanel.background = Color.gray
-        mainPanel.preferredSize = Dimension(610, (dim - 1) * 604)
+        mainPanel.preferredSize = Dimension(610, (dim - 1) * 604 + 40)
         mainPanel.border = BorderFactory.createEmptyBorder(0, 0, 0, 0)
         scrollPanel.setBounds(0, 0, 620, 610)
         scrollPanel.verticalScrollBar.unitIncrement = 20//设置滚轮滚动速度
@@ -39,5 +40,13 @@ class TreeStepPanel(private val dim: Int = DataHolder.cost.size) {
         treePanel.add(stepLabel)
         treePanel.border = BorderFactory.createEmptyBorder(2, 5, 2, 5)
         mainPanel.add(treePanel)
+    }
+
+    fun addResultPanel(minCost: Int) {
+        val panel = JPanel()
+        panel .preferredSize = Dimension(PIC_WIDTH, 30)
+        panel.add(JLabel("最短路径长度: $minCost"))
+//                preferredSize = Dimension(PIC_WIDTH, PIC_HEIGHT)
+        mainPanel.add(panel)
     }
 }

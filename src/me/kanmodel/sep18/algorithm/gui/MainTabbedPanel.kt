@@ -1,7 +1,7 @@
 package me.kanmodel.sep18.algorithm.gui
 
-import me.kanmodel.sep18.algorithm.Kruskal
-import me.kanmodel.sep18.algorithm.Prim
+import me.kanmodel.sep18.algorithm.algorithm.Kruskal
+import me.kanmodel.sep18.algorithm.algorithm.Prim
 import me.kanmodel.sep18.algorithm.gui.CoorTable.Companion.getCoorTablePane
 import me.kanmodel.sep18.algorithm.gui.PictureADMTable.Companion.getADMTablePane
 import me.kanmodel.sep18.algorithm.gui.TreePanel.Companion.getPicPanel
