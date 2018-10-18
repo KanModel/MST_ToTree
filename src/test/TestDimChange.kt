@@ -1,4 +1,4 @@
-package me.kanmodel.sep18.algorithm.test
+package test
 
 import me.kanmodel.sep18.algorithm.util.DataHolder
 import me.kanmodel.sep18.algorithm.util.DataHolder.print2D

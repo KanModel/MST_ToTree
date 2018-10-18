@@ -1,8 +1,8 @@
-package me.kanmodel.sep18.algorithm.gui
+package test
 
 
+import me.kanmodel.sep18.algorithm.gui.TreeFrame
 import me.kanmodel.sep18.algorithm.gui.TreePanel.Companion.getTreePanel
-import me.kanmodel.sep18.algorithm.util.DataHolder
 
 /**
  * Created with IntelliJ IDEA.

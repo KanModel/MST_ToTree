@@ -33,8 +33,8 @@ class TreeStepPanel(private val dim: Int = DataHolder.cost.size) {
         scrollPanel.setLocation(64, 64)
     }
 
-    fun addTreePanel(cost: Array<IntArray>, coor: Array<IntArray> = DataHolder.defaultCoordinateGenerate()) {
-        val treePanel: TreePanel = TreePanel(null, cost, coor = DataHolder.coor, dim = dim)
+    fun addTreePanel(cost: Array<IntArray>, coor: Array<IntArray> = DataHolder.coor) {
+        val treePanel: TreePanel = TreePanel(null, cost, coor = coor, dim = dim)
         val stepLabel = JLabel("≤Ω÷Ë${++count}")
         stepLabel.font = Font(null, Font.PLAIN, 14)
         treePanel.add(stepLabel)
