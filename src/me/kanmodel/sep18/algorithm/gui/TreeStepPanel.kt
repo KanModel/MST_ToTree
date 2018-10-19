@@ -46,7 +46,6 @@ class TreeStepPanel(private val dim: Int = DataHolder.cost.size) {
         val panel = JPanel()
         panel .preferredSize = Dimension(PIC_WIDTH, 30)
         panel.add(JLabel("最短路径长度: $minCost"))
-//                preferredSize = Dimension(PIC_WIDTH, PIC_HEIGHT)
         mainPanel.add(panel)
     }
 }

@@ -4,6 +4,7 @@ import me.kanmodel.sep18.algorithm.gui.TreeFrame
 import me.kanmodel.sep18.algorithm.gui.TreeStepPanel
 import me.kanmodel.sep18.algorithm.util.DataHolder
 import me.kanmodel.sep18.algorithm.util.DataHolder.print2D
+import me.kanmodel.sep18.algorithm.util.Log
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,7 +31,7 @@ class Kruskal {
             var newCost = Array(dim) { it -> cost[it].copyOf() }
             val tarCost = Array<IntArray>(dim) { IntArray(dim) { Int.MAX_VALUE } }
 
-            var minCost = 0
+//            var minCost = 0
             var minCostX = 0
             var minCostY = 0 // 当前最短路径节点
             //成环判断
@@ -59,7 +60,7 @@ class Kruskal {
                 sec = find(parent, j)
                 if (fir != sec) {
                     parent[fir] = sec
-                    println("连接最短路径${i + 1}--${j + 1}")
+                    Log.v("连接最短路径${i + 1}--${j + 1}")
                     tarCost[i][j] = newCost[i][j]
                     return true
                 } else {
@@ -74,7 +75,7 @@ class Kruskal {
                 getMinCost()
                 while ((select(newCost, minCostX, minCostY))) {
                     count++
-                    println("${count}")
+                    Log.v("${count}")
                     print2D(tarCost)
                     treeFrame.addTreePanel(Array(dim) { it -> tarCost[it].copyOf() }, DataHolder.coor)
                 }
@@ -123,7 +124,7 @@ class Kruskal {
                 sec = find(parent, j)
                 if (fir != sec) {
                     parent[fir] = sec
-                    println("连接最短路径${i + 1}--${j + 1}")
+                    Log.v("连接最短路径${i + 1}--${j + 1}")
                     tarCost[i][j] = newCost[i][j]
                     minCost += newCost[i][j]
                     return true
@@ -139,12 +140,12 @@ class Kruskal {
                 getMinCost()
                 while ((select(newCost, minCostX, minCostY))) {
                     count++
-                    println("${count}")
+                    Log.v("${count}")
                     print2D(tarCost)
                     treeStepPanel.addTreePanel(Array(dim) { it -> tarCost[it].copyOf() }, DataHolder.coor)
                 }
             }
-            println("最短路径: $minCost")
+            Log.v("最短路径: $minCost")
             treeStepPanel.addResultPanel(minCost)
             return treeStepPanel
         }

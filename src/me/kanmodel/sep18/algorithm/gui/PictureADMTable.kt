@@ -1,6 +1,7 @@
 package me.kanmodel.sep18.algorithm.gui
 
 import me.kanmodel.sep18.algorithm.util.DataHolder
+import me.kanmodel.sep18.algorithm.util.Log
 import java.awt.*
 import java.util.regex.Pattern
 import javax.swing.JFrame
@@ -113,7 +114,7 @@ class PictureADMTable(private var dim: Int) : AbstractTableModel() {
             val regex = "\\d*|∞|max|m"
             val p = Pattern.compile(regex)
             if (!p.matcher(aValue.toString()).matches()) {
-                println("不符合格式取消改变值")
+                Log.i("不符合格式取消改变值")
                 return
             }
             val real: Int =
@@ -183,7 +184,7 @@ class PictureADMTable(private var dim: Int) : AbstractTableModel() {
         @JvmStatic
         fun main(args: Array<String>) {
             showADMPictureTable()
-            println("Hello")
+            Log.i("Hello")
         }
 
     }

@@ -103,7 +103,7 @@ object DataHolder {
         val yDeviation = PIC_HEIGHT/2
         for (i in 0 until dim) {
             val angle: Double = 360.0 / dim * i
-            println("x: ${cos(angle / 180 * PI) * radius} y: ${sin(angle / 180 * PI) * radius}")
+            Log.i("x: ${cos(angle / 180 * PI) * radius} y: ${sin(angle / 180 * PI) * radius}")
             newCoor[i][0] = (cos(angle / 180 * PI) * radius).toInt() + xDeviation
             newCoor[i][1] = (sin(angle / 180 * PI) * radius).toInt() + yDeviation
         }
@@ -151,7 +151,7 @@ object DataHolder {
                     System.out.printf("%-3s ", j)
                 }
             }
-            println()
+            Log.v()
         }
     }
 }

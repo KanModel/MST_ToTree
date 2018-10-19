@@ -4,6 +4,7 @@ import me.kanmodel.sep18.algorithm.util.DataHolder
 import me.kanmodel.sep18.algorithm.util.DataHolder.KRUSKAL
 import me.kanmodel.sep18.algorithm.util.DataHolder.PRIM
 import me.kanmodel.sep18.algorithm.util.FileExecutor
+import me.kanmodel.sep18.algorithm.util.Log
 import java.awt.Component
 import java.awt.Font
 import java.awt.event.ItemEvent
@@ -43,7 +44,7 @@ class WelcomePanel :JPanel() {
             )
             if (result != null) {
                 if (pattern.matcher(result).matches() && result.isNotEmpty()) {
-                    println("Result: ${result.toInt()}")
+                    Log.i("Result: ${result.toInt()}")
                     if (result.toInt() > 0) {
                         DataHolder.changeDimension(result.toInt())
                         dimLabel.text = "当前邻接矩阵纬度: ${DataHolder.cost.size}"
@@ -75,10 +76,10 @@ class WelcomePanel :JPanel() {
         radioBtn2.font = Font(null, Font.ITALIC, 30)
         radioBtn1.addItemListener {
             if (it.stateChange == ItemEvent.SELECTED) {
-                println("选择${radioBtn1.text}算法")
+                Log.i("选择${radioBtn1.text}算法")
                 DataHolder.algorithmSelect = PRIM
             } else {
-                println("选择${radioBtn2.text}算法")
+                Log.i("选择${radioBtn2.text}算法")
                 DataHolder.algorithmSelect = KRUSKAL
             }
         }
@@ -106,7 +107,7 @@ class WelcomePanel :JPanel() {
             if (result == JFileChooser.APPROVE_OPTION) {
                 val file = fileChooser.selectedFile
 
-                println("FILE: ${file.absolutePath}")
+                Log.i("FILE: ${file.absolutePath}")
                 FileExecutor.readFile(file)
             }
         }

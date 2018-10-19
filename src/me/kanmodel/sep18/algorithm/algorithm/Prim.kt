@@ -4,6 +4,7 @@ import me.kanmodel.sep18.algorithm.gui.TreeFrame
 import me.kanmodel.sep18.algorithm.gui.TreeStepPanel
 import me.kanmodel.sep18.algorithm.util.DataHolder
 import me.kanmodel.sep18.algorithm.util.DataHolder.print2D
+import me.kanmodel.sep18.algorithm.util.Log
 import java.lang.IndexOutOfBoundsException
 
 /**
@@ -46,7 +47,7 @@ class Prim{
                     }
                 }
             }
-            println("cost[${k + 1}][${l + 1}] ${cost[k][l]} 为最短边")
+            Log.v("cost[${k + 1}][${l + 1}] ${cost[k][l]} 为最短边")
 
             picToTree[k][l] = cost[k][l]
             picToTree[l][k] = cost[k][l]
@@ -69,7 +70,7 @@ class Prim{
             near[k] = 0
             near[l] = 0
             near.forEach { print("$it ") }
-            println()
+            Log.v()
 
             try {
 
@@ -84,7 +85,7 @@ class Prim{
                             }
                         }
                     }
-                    println("最短路径权值${min + 1} - ${near[min]}：$costTmp")
+                    Log.v("最短路径权值${min + 1} - ${near[min]}：$costTmp")
                     minCost += costTmp
 
                     picToTree[min][near[min] - 1] = cost[min][near[min] - 1]
@@ -100,10 +101,10 @@ class Prim{
                         }
                     }
                     near.forEach { print("$it ") }
-                    println()
+                    Log.v()
                 }
             } catch (e: IndexOutOfBoundsException) {
-                println(e)
+                Log.v(e)
             }
             return treeFrame
         }
@@ -139,7 +140,7 @@ class Prim{
                     }
                 }
             }
-            println("cost[${k + 1}][${l + 1}] ${cost[k][l]} 为最短边")
+            Log.v("cost[${k + 1}][${l + 1}] ${cost[k][l]} 为最短边")
 
             picToTree[k][l] = cost[k][l]
             picToTree[l][k] = cost[k][l]
@@ -163,7 +164,7 @@ class Prim{
             near[k] = 0
             near[l] = 0
             near.forEach { print("$it ") }
-            println()
+            Log.v()
 
             try {
                 for (i in 1 until dim - 1) {
@@ -177,7 +178,7 @@ class Prim{
                             }
                         }
                     }
-                    println("最短路径权值${min + 1} - ${near[min]}：$costTmp")
+                    Log.v("最短路径权值${min + 1} - ${near[min]}：$costTmp")
                     minCost += costTmp
 
                     picToTree[min][near[min] - 1] = cost[min][near[min] - 1]
@@ -194,12 +195,12 @@ class Prim{
                         }
                     }
                     near.forEach { print("$it ") }
-                    println()
+                    Log.v()
                 }
             } catch (e: IndexOutOfBoundsException) {
-                println(e)
+                Log.v(e)
             }
-            println("最短路径: $minCost")
+            Log.v("最短路径: $minCost")
             treeStepPanel.addResultPanel(minCost)
             return treeStepPanel
         }

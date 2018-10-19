@@ -10,13 +10,13 @@ import me.kanmodel.sep18.algorithm.Main
  * Time: 9:59
  */
 object Log {
-    fun i(message: Any?) {
+    fun i(message: Any? = "") {
         if (Main.isDebug) {
             println(message)
         }
     }
 
-    fun w(message: Any?) {
+    fun v(message: Any? = "") {
         println(message)
     }
 }

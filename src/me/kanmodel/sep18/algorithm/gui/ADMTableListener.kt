@@ -1,6 +1,7 @@
 package me.kanmodel.sep18.algorithm.gui
 
 import me.kanmodel.sep18.algorithm.gui.PictureADMTable.Companion.syncFlag
+import me.kanmodel.sep18.algorithm.util.Log
 import javax.swing.event.TableModelEvent
 import javax.swing.event.TableModelListener
 import javax.swing.table.TableModel
@@ -31,11 +32,11 @@ class ADMTableListener(private val tableModel: TableModel) : TableModelListener 
             val type = e.type
 
 
-            println("$firstRow $column ${tableModel.getValueAt(firstRow, column)} $type")//输出行列号 内容 事件代号
+            Log.i("$firstRow $column ${tableModel.getValueAt(firstRow, column)} $type")//输出行列号 内容 事件代号
 
             if (type == TableModelEvent.UPDATE) {
                 syncFlag = true
-                println("同步对角数值")
+                Log.i("同步对角数值")
                 tableModel.setValueAt(tableModel.getValueAt(firstRow, column), column - 1, firstRow + 1)
             }
         } else {

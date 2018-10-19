@@ -22,7 +22,6 @@ class MainTabbedPanel : JTabbedPane() {
 
     init {
         font = Font(null, Font.PLAIN, 18)
-//        addTab("欢迎", WelcomePanel())
         addTab("欢迎", null, WelcomePanel(), "更改维度/选择算法")
         addTab("邻接矩阵", null, null, "显示/编辑当前邻接矩阵")
         addTab("结点坐标", null, null, "显示/编辑当前结点显示坐标")

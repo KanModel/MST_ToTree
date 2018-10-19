@@ -1,6 +1,7 @@
 package me.kanmodel.sep18.algorithm.gui
 
 import me.kanmodel.sep18.algorithm.util.DataHolder
+import me.kanmodel.sep18.algorithm.util.Log
 import java.awt.BorderLayout
 import java.util.regex.Pattern
 import javax.swing.JPanel
@@ -41,7 +42,7 @@ class CoorTable : AbstractTableModel() {
             val regex = "\\d*|∞|max|m"
             val p = Pattern.compile(regex)
             if (!p.matcher(aValue.toString()).matches()) {
-                println("不符合格式取消改变值")
+                Log.i("不符合格式取消改变值")
                 return
             }
             DataHolder.coor[rowIndex][columnIndex - 2] = aValue.toString().toInt()
@@ -73,7 +74,7 @@ class CoorTable : AbstractTableModel() {
             }
 
             table.tableHeader.resizingAllowed = true
-            val tableModel = table.model
+//            val tableModel = table.model
 //            tableModel.addTableModelListener(ADMTableListener(tableModel))
 
             panel.add(table.tableHeader, BorderLayout.NORTH)
