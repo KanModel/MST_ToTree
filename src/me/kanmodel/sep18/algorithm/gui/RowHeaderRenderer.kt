@@ -12,7 +12,7 @@ import javax.swing.table.TableCellRenderer
 /**
  * Created with IntelliJ IDEA.
  * Description:
- * User: kgdwhsk
+ * User: KanModel
  * Date: 2018-10-13
  * Time: 10:29
  */

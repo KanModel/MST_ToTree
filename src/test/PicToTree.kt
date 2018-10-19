@@ -7,7 +7,7 @@ import me.kanmodel.sep18.algorithm.gui.TreePanel.Companion.getTreePanel
 /**
  * Created with IntelliJ IDEA.
  * Description:
- * User: kgdwhsk
+ * User: KanModel
  * Date: 2018-09-18
  * Time: 20:46
  */

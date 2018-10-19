@@ -6,7 +6,7 @@ import me.kanmodel.sep18.algorithm.util.FileExecutor
 /**
  * Created with IntelliJ IDEA.
  * Description:
- * User: kgdwhsk
+ * User: KanModel
  * Date: 2018-09-20
  * Time: 21:48
  */

@@ -5,7 +5,7 @@ import me.kanmodel.sep18.algorithm.Main
 /**
  * Created with IntelliJ IDEA.
  * Description:
- * User: kgdwhsk
+ * User: KanModel
  * Date: 2018-10-13
  * Time: 9:59
  */

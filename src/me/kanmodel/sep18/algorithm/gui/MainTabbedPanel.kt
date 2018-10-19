@@ -14,7 +14,7 @@ import javax.swing.JTabbedPane
 /**
  * Created with IntelliJ IDEA.
  * Description:
- * User: kgdwhsk
+ * User: KanModel
  * Date: 2018-09-25
  * Time: 14:20
  */

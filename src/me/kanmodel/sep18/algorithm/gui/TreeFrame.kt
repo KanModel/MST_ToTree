@@ -8,9 +8,8 @@ import java.awt.Toolkit
 import javax.swing.*
 
 /**
- * Created with IntelliJ IDEA.
  * Description:
- * User: kgdwhsk
+ * @author: KanModel
  * Date: 2018-10-13
  * Time: 10:43
  */
@@ -41,7 +40,7 @@ class TreeFrame(cost: Array<IntArray>? = null, coor: Array<IntArray>? = null, va
     }
 
     fun addTreePanel(cost: Array<IntArray>, coor: Array<IntArray>) {
-        val treePanel: TreePanel = TreePanel(this, cost, coor, dim = dim)
+        val treePanel: TreePanel = TreePanel(cost, coor, dim = dim)
 //        val treePanel: TreePanel = TreePanel(this, cost, coor, dim)
         treePanel.add(JLabel("≤Ω÷Ë${++count}"))
         treePanel.border = BorderFactory.createEmptyBorder(2, 5, 2, 5)

@@ -10,7 +10,7 @@ import javax.swing.table.AbstractTableModel
 /**
  * Created with IntelliJ IDEA.
  * Description:
- * User: kgdwhsk
+ * User: KanModel
  * Date: 2018-10-17
  * Time: 19:04
  * 4列 第一列序号 第二列名字 三，四列x，y坐标

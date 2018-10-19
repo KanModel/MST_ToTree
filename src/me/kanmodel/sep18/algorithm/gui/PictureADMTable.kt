@@ -13,7 +13,7 @@ import javax.swing.table.AbstractTableModel
 /**
  * Created with IntelliJ IDEA.
  * Description:
- * User: kgdwhsk
+ * User: KanModel
  * Date: 2018-09-20
  * Time: 15:00
  */

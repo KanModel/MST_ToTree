@@ -8,7 +8,7 @@ import javax.swing.*
 /**
  * Created with IntelliJ IDEA.
  * Description:
- * User: kgdwhsk
+ * User: KanModel
  * Date: 2018-09-26
  * Time: 23:30
  */
@@ -34,7 +34,7 @@ class TreeStepPanel(private val dim: Int = DataHolder.cost.size) {
     }
 
     fun addTreePanel(cost: Array<IntArray>, coor: Array<IntArray> = DataHolder.coor) {
-        val treePanel: TreePanel = TreePanel(null, cost, coor = coor, dim = dim)
+        val treePanel: TreePanel = TreePanel(cost, coor = coor, dim = dim)
         val stepLabel = JLabel("≤Ω÷Ë${++count}")
         stepLabel.font = Font(null, Font.PLAIN, 14)
         treePanel.add(stepLabel)

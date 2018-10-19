@@ -8,7 +8,7 @@ import me.kanmodel.sep18.algorithm.util.DataHolder.print2D
 /**
  * Created with IntelliJ IDEA.
  * Description:
- * User: kgdwhsk
+ * User: KanModel
  * Date: 2018-09-23
  * Time: 15:24
  */
