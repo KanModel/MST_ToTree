@@ -12,9 +12,8 @@ import java.awt.Font
 import javax.swing.JTabbedPane
 
 /**
- * Created with IntelliJ IDEA.
- * Description:
- * User: KanModel
+ * Description: Ñ¡Ïî¿¨Ãæ°å
+ * @author: KanModel
  * Date: 2018-09-25
  * Time: 14:20
  */
